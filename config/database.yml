@@ -1,0 +1,26 @@
+# common settings
+default: &default
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: test_central
+  checkout_timeout: 30 # seconds
+  pool: 50
+  username: <%= ENV["RAILS_DB_USER"] || 'root' %>
+  password: <%= ENV["RAILS_DB_PASS"] || 'root@abc' %>
+  host: <%= ENV["RAILS_DB_HOST"] || '127.0.0.1' %> # use IP for Windows + thin servers
+  port: <%= ENV["RAILS_DB_PORT"] || '3306' %>
+
+# local development database
+development: &development
+  <<: *default
+
+# used to verify the application and regenerate seeds file
+test:
+  <<: *development
+  database: test_central_unit_test
+
+# production database
+# TODO replace prod settings with real values
+production: &production
+  <<: *default

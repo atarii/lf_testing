@@ -1,0 +1,38 @@
+<%= stylesheet_link_tag 'timepicker' %>
+<%= javascript_include_tag 'timepicki' %>
+<% provide(:title, 'Automation Testing') %>
+<%
+   if session[:user_role].to_i == 1 || session[:user_role].to_i == 2
+     tc_silos = [['ATG', 'ATG'], ['WS', 'Web Services'], ['TC', 'Test Central']]
+   else
+     tc_silos = [['ATG', 'ATG'], ['WS', 'Web Services']]
+   end
+
+   silo_options = tc_silos + @outpost_silos
+%>
+
+<div class="glb-loader">
+  <div></div>
+</div>
+
+<h1>
+  <%= 'New Test Run' %>
+  <input class="hide" type="file" name="csv-file" id="csv-file">
+  <a class="btn btn-link" href="javascript:void(0)" id="csv-link" onclick="$('#csv-file:hidden').trigger('click');">import
+    config</a>
+</h1>
+
+<%= form_tag({ controller: 'run', action: 'add_queue' }, method: 'post', multipart: true, class: 'form-horizontal') do %>
+  <div class="col-xs-offset-3" id="new_run">
+    <%= tc_radio_buttons_group :silo, 'Silo', silo_options, nil, class: 'col-sm-10' %>
+  </div>
+  <div id="component"></div>
+<% end %>
+
+<% unless @selected_silo.blank? %>
+  <script>
+    $(document).ready(function () {
+      $("label:has(input) > input[name='silo'][value='<%= @selected_silo %>']").click();
+    });
+  </script>
+<% end %>

@@ -1,0 +1,31 @@
+<%= tc_text_input_group :user_email, 'Email Results', session[:user_email] %>
+<%= tc_text_input_group :note, 'Description', nil, placeholder: '255 characters max' %>
+
+<div class="form-group">
+  <%= tc_label_tag :start_time, 'Start time' %>
+  <div class="col-sm-5">
+    <input type="text" id="start_time" name="start_time" placeholder="hh:mm AM" class="form-control">
+  </div>
+</div>
+
+<div class="form-group">
+  <%= tc_label_tag :repeat, 'Repeat' %>
+  <div class="col-sm-5 radio">
+    <%= check_box_tag(:repeat, 'on', false) %>
+  </div>
+</div>
+
+<div class="repeat_area">
+  <div class="form-group">
+    <%= tc_label_tag :minute, 'By Minutes' %>
+    <div class="col-sm-5">
+      <%= number_field_tag(:minute, nil, in: 1..1440, class: 'form-control') %>
+    </div>
+  </div>
+
+  <% day_options = [[0, 'Sun'], [1, 'Mon'], [2, 'Tue'], [3, 'Wed'], [4, 'Thu'], [5, 'Fri'], [6, 'Sat']] %>
+  <%= tc_checkboxes_group :dow, 'Day of week', day_options, [], class: 'col-sm-9' %>
+</div>
+<script>
+  $('#start_time').timepicki();
+</script>

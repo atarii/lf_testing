@@ -1,0 +1,1 @@
+$outpost_refresh_rate = 0

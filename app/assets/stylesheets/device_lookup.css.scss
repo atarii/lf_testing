@@ -1,0 +1,37 @@
+.device_lookup {
+  form {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+
+    input {
+      width: 235px;
+    }
+  }
+
+  pre {
+    border: 0;
+  }
+
+  table {
+    margin: 0 auto;
+  }
+
+  td,
+  th {
+    padding: 0 5px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th.rowspan {
+    vertical-align: bottom;
+  }
+
+  th:nth-child(even),
+  td:nth-child(even),
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+}

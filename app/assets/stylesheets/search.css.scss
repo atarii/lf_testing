@@ -1,0 +1,22 @@
+.highlights {
+  background-color: #eeeeee;
+  color: #000000;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.result {
+  table {
+    margin: auto;
+    td {
+      border: 1px solid #dddddd;
+      padding: 2px;
+    }
+  }
+}
+
+#q {
+  width: 100%;
+}

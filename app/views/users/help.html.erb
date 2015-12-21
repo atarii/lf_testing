@@ -1,0 +1,19 @@
+<% provide(:title, 'Help') %>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>Guides</h2>
+      <p class="subheader">The following links link to guide files that help us deploy and work with Test Central server <br/></p>
+    </div>
+  </div>
+  <ul>
+    <% @link_list.each do |link|
+      if link.include?('.md')
+    %>
+        <li><%= link_to link.split('/')[-1], "/users/help/view_markdown/#{link}" %></li>
+      <% else %>
+        <li><%= link_to link.split('/')[-1], action: 'download', file: link %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

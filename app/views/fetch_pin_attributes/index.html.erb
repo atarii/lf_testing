@@ -1,0 +1,24 @@
+<%
+   provide(:title, 'PINs status')
+   env_options = session[:user_role].to_i == 1 ? ['QA', 'PROD'] : ['QA']
+%>
+
+<div class="glb-loader">
+  <div></div>
+</div>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>Fetch PIN Status</h2>
+      <p class="subheader">This page allows you to fetch PIN status</p>
+    </div>
+  </div>
+  <div class="form-horizontal">
+    <%= tc_radio_buttons_group :env, 'Environment', env_options, nil, class: 'col-sm-9' %>
+    <%= tc_text_area_group :lf_pin, 'PINs', '', '25x10' %>
+    <%= tc_submit_tag 'Fetch Status', { id: 'fetch_status', class: 'btn btn-success js-validate-env-locale' } %>
+    <div class="controls pin-status">
+      <div id="pins_status" class="col-sm-offset-2"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,178 @@
+<%
+   user_role = session[:user_role].to_i
+   outpost_options = Outpost.outpost_nav_options
+%>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to image_tag('testcentral_logo.png', :border => 0), root_path, class: 'navbar-brand' %>
+    </div>
+    <table id="run_status">
+      <tbody>
+      <tr class="h3">
+        <td id="srunning" class="text-center">0</td>
+        <td id="squeued" class="text-center">0</td>
+        <td id="sdaily" class="text-center">0</td>
+        <td id="sscheduled" class="text-center">0</td>
+        <td id="soutpost" class="text-center">0</td>
+      </tr>
+      <tr class="status_note">
+        <td><a href="#recent">running</a></td>
+        <td><a href="#queued">queued</a></td>
+        <td><a href="view/daily">today</a></td>
+        <td><a href="#scheduled">scheduled</a></td>
+        <td><a href="#outpost">outpost</a></td>
+      </tr>
+      </tbody>
+    </table>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li class="dropdown">
+          <a href="/dashboard/index" class="dropdown-toggle" data-hover="dropdown">
+            Dashboard
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to 'env versions', :controller => 'dashboard', :action => 'env_versions' %></li>
+            <% if 1 <= user_role && user_role <= 3 %>
+              <li><%= link_to 'schedules', admin_scheduler_path %></li>
+            <% end %>
+            <li><%= link_to 'daily results', '/view/daily' %></li>
+            <li><%= link_to 'search results', search_path %></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-hover="dropdown">
+            ATG
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to 'view results', '/ATG/view' %></li>
+            <% if 1 <= user_role && user_role <= 3 %>
+              <li><%= link_to 'run scripts', '/ATG/run' %></li>
+              <li class="divider"></li>
+              <li><%= link_to 'config ATG', atgs_atgconfig_path %></li>
+              <li><%= link_to 'upload PIN', atgs_upload_code_path %></li>
+              <li><%= link_to 'import ATG moas', atg_moas_importings_index_path %></li>
+              <li><%= link_to 'content platform checker', atg_content_platform_checker_index_path %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-hover="dropdown">
+            Web Services
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to 'view results', '/WS/view' %></li>
+            <% if 1 <= user_role && user_role <= 3 %>
+              <li><%= link_to 'run scripts', '/WS/run' %></li>
+            <% end %>
+          </ul>
+        </li>
+
+        <% if 1 <= user_role && user_role <= 3 %>
+          <% outpost_options.each do |outpost| %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-hover="dropdown">
+                <%= outpost[:title] %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <% if outpost[:result] %>
+                  <li><%= link_to 'view results', "/#{outpost[:silo]}/view" %></li>
+                <% end %>
+                <% if outpost[:status] == 'Ready' %>
+                  <li><%= link_to 'run scripts', "/#{outpost[:silo]}/run" %></li>
+                <% end %>
+                <li><%= link_to 'upload result', "/outpost/upload_result/#{outpost[:silo]}" %></li>
+              </ul>
+            </li>
+          <% end %>
+        <% else %>
+          <% outpost_options.each do |outpost| %>
+            <% if outpost[:result] %>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-hover="dropdown">
+                  <%= outpost[:title] %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= link_to 'view results', "/#{outpost[:silo]}/view" %></li>
+                </ul>
+              </li>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if user_role == 1 %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-hover="dropdown">
+              Test Central <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><%= link_to 'view results', '/TC/view' %></li>
+              <li><%= link_to 'run scripts', '/TC/run' %></li>
+            </ul>
+          </li>
+        <% end %>
+
+        <% if user_role == 1 || user_role == 2 %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-hover="dropdown">
+              Utilities<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><%= link_to 'account clear', utilities_clear_account_path %></li>
+              <li><%= link_to 'checksum comparison', utilities_checksum_comparison_path %></li>
+              <li><%= link_to 'checksum results', '/browsing_files/index?type=checksum_comparison' %></li>
+              <li><%= link_to 'customer lookup', utilities_customer_lookup_path %></li>
+              <li><%= link_to 'device linking', utilities_device_linking_path %></li>
+              <li><%= link_to 'device lookup', utilities_device_lookup_path %></li>
+              <li><%= link_to 'geoip lookup', utilities_geoip_lookup_path %></li>
+              <li><%= link_to 'pin redemption', utilities_redeem_pin_path %></li>
+              <li><%= link_to 'pin status', utilities_pin_status_path %></li>
+            </ul>
+          </li>
+        <% end %>
+        <li class="dropdown">
+          <% if session[:first_name].nil? %>
+            <a class="dropdown-toggle" data-hover="dropdown">
+              Users <b class="caret"></b>
+            </a>
+          <% else %>
+            <a class="dropdown-toggle" data-hover="dropdown">
+              <%= session[:first_name] %> <b class="caret"></b>
+            </a>
+          <% end %>
+          <ul class="dropdown-menu" role="menu">
+            <% if user_role == 0 %>
+              <li><%= link_to 'sign in', signin_path %></li>
+            <% else %>
+              <% if user_role == 1 %>
+                <li><%= link_to 'add/edit user', '/users/create' %></li>
+                <li><%= link_to 'audit log', users_logging_path %></li>
+              <% end %>
+              <% if user_role == 1 || user_role == 2 %>
+                <li><%= link_to 'config', admin_rails_app_config_path %></li>
+                <li><%= link_to 'email rollups', admin_email_rollup_path %></li>
+                <li><%= link_to 'station settings', admin_stations_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to 'help', users_help_path %></li>
+                <li class="divider"></li>
+              <% end %>
+              <li><%= link_to 'sign out', signout_path %></li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,38 @@
+<% provide(:title, "ATG MOAS Import") %>
+<div class="glb-loader">
+  <div></div>
+</div>
+
+<div class='col-xs-offset-3'>
+  <div class='content-header'>
+    <div class='header-inner'>
+      <h2>ATG MOAS importing</h2>
+
+      <p class='subheader'>
+        1. Importing data is in <b>the first</b> sheet of files <br/>
+        2. Let Catalog or YMAL excel file fields empty if you don't want to import them.
+      </p>
+    </div>
+  </div>
+
+  <%= form_tag({ action: 'excel2mysql' }, method: 'post', multipart: true, class: 'form-horizontal') do %>
+    <% languages = [['english', 'English'], ['french', 'French']] %>
+    <%= tc_radio_buttons_group :language, 'Language', languages, nil %>
+    
+    <%= tc_file_browser_group :excel_file, 'MOAS file' %>
+    <%= tc_file_browser_group :excel_catalog_file, 'Catalog file', title: 'Let me empty if you don\'t want to import catalog file' %>
+    <%= tc_file_browser_group :excel_ymal_file, 'YMAL file', title: 'Let me empty if you don\'t want to import YMAL file' %>
+
+    <div class='form-group'>
+      <div class='col-sm-offset-2 col-sm-2'>
+        <%= submit_tag('Import data', class: 'btn btn-success', onclick: 'return fn_import();') %>
+      </div>
+    </div>
+
+    <br/>
+
+    <div class='form-group'>
+      <%= raw @message %>
+    </div>
+  <% end %>
+</div>

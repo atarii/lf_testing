@@ -1,0 +1,13 @@
+<%= summary_text = <<-HTML.strip_heredoc
+    #{strip_tags @run.summary_html
+                 .squeeze(' ')
+                 .gsub('</tr><tr>', "\n ")
+                 .gsub('</td>', ' ')
+                 .gsub('<br/>', "\n")}
+    HTML
+    summary_text.gsub(/\n\n\n/, "\n")
+%>
+<%= strip_tags @run.to_html(@root_url).gsub('<li>', "\n  ") %>
+
+Email auto-generated from <%= @server_name %>. Please do not respond.
+Requester <%= @run.data['email'] %>

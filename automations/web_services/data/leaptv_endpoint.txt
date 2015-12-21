@@ -1,0 +1,7 @@
+https://%sleaptv.leapfrog.com/register/index.php
+https://%sleaptv.leapfrog.com/register/login.php
+https://%sleaptv.leapfrog.com/register/createaccount.php
+https://%sleaptv.leapfrog.com/register/parentlock.php
+https://%sleaptv.leapfrog.com/register/childadd.php
+https://%sleaptv.leapfrog.com/register/childaddcreated.php
+https://%sleaptv.leapfrog.com/register/appcenter.php

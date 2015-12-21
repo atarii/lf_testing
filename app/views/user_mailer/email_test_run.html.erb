@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag 'dashboard' %>
+    <%= stylesheet_link_tag 'custom' %>
+    <style type="text/css">
+      .passed {
+        color: green;
+      }
+
+      .failed {
+        color: red;
+      }
+
+      .n_a {
+        color: goldenrod;
+      }
+
+      ol {
+        list-style-type: decimal-leading-zero;
+      }
+
+      table td {
+        padding: 2px 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <%= raw @run.summary_html @root_url %>
+    <br/>
+    <%= raw @run.to_html @root_url %>
+
+    <p>Email auto-generated from <a href="<%= @root_url %>"><%= @server_name %></a>. Please do not respond.</p>
+    <p>Requester <a href="mailto:<%= @run.data['email'] %>"><%= @run.data['email'] %></a></p>
+  </body>
+</html>

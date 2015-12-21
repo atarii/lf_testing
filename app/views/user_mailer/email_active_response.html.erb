@@ -1,0 +1,17 @@
+<html>
+<head>
+  <style type="text/css">
+    body { font-family: Helvetica, Arial; }
+  </style>
+</head>
+<body>
+<p>Dear <%= @user_name%>,</p>
+<p>
+This e-mail is to inform you that your Test Central account has been active.<br>
+Please access to Test Central site and verify that you can access with provided account.<br>
+URL: <%= @sign_in_url%><br>
+Account email: <%= @email%>
+</p>
+<p>Thanks,</p>
+</body>
+</html>

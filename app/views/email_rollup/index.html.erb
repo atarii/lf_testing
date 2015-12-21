@@ -1,0 +1,91 @@
+<%= javascript_include_tag 'timepicki' %>
+<%= stylesheet_link_tag 'timepicker' %>
+<% provide(:title, 'Email Rollups') %>
+<div class="col-xs-offset-3">
+	<div class="content-header">
+		<div class="header-inner">
+			<h2>Dashboard Rollup Email Configuration</h2>
+	  </div>
+	</div>
+	<div class="glb-loader">
+	  <div>Please wait a minute...</div>
+	</div>
+	<div class="form-horizontal">
+		<div id='dre_msg'></div>
+		<div class="form-group">
+		  <%= label_tag :dre_enabled, 'Enabled', class: 'col-sm-2 control-label' %>
+		  <div class="col-sm-5">
+		  	<%= check_box_tag :dre_enabled, 0, checked = eval(@configure_dashboard_rollup_email[:enabled]), class: 'checkbox' %>
+		  </div>
+		</div>
+		<div class="form-group">
+		  <%= label_tag :dre_time_amount, 'Every', class: 'col-sm-2 control-label' %>
+		  <div class="col-sm-5">
+		  	<%= text_field_tag :dre_time_amount, @configure_dashboard_rollup_email[:time_amount], class: 'form-control' %>
+		  	<p>&nbsp;&nbsp;minutes</p>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= label_tag(:dre_start_time, 'Start time', class: 'col-sm-2 control-label') %>
+		  <div class="col-sm-5">
+		  	<input type='text' id='dre_start_time' name='dre_start_time' value='<%=@dashboard_start_time%>' class="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= label_tag :dre_emails, 'Send to emails', class: 'col-sm-2 control-label' %>
+		  <div class="col-sm-5">
+		  	<%= text_field_tag :dre_emails, @configure_dashboard_rollup_email[:emails], placeholder: 'email1@abc.test; email2@abc.test', class: 'form-control' %>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-2">
+			  <%= submit_tag("Execute", class: "btn btn-success", type: 'button', :id => 'btn_dre') %>
+			</div>
+		</div>
+	</div>
+
+	<br /> <br />
+	<div class="content-header">
+		<div class="header-inner">
+			<h2>Schedules Rollup Email Configuration</h2>
+		</div>
+	</div>
+	<div class="form-horizontal">
+		<div id='sch_msg'></div>
+		<div class="form-group">
+		  <%= label_tag :sch_enabled, 'Enabled', class: 'col-sm-2 control-label' %>
+		  <div class="col-sm-5">
+		  	<%= check_box_tag :sch_enabled, 0, checked = eval(@configure_schedules_rollup_email[:enabled]), class: 'checkbox' %>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= label_tag :sch_time_amount, 'Every', class: 'col-sm-2 control-label' %>
+		  <div class="col-sm-5">
+		  	<%= text_field_tag :sch_time_amount, @configure_schedules_rollup_email[:time_amount], class: 'form-control' %>
+		  	<p>&nbsp;&nbsp;minutes</p>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= label_tag(:sch_start_time, 'Start time', class: 'col-sm-2 control-label') %>
+		  <div class="col-sm-5">
+		  	<input type='text' id='sch_start_time' name='sch_start_time' value='<%=@schedules_start_time%>' class="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= label_tag :sch_emails, 'Send to emails', class: 'col-sm-2 control-label' %>
+		  <div class="col-sm-5">
+		  	<%= text_field_tag :sch_emails, @configure_schedules_rollup_email[:emails], placeholder: 'email1@abc.test; email2@abc.test', class: 'form-control' %>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-2">
+		  	<%= submit_tag("Execute", class: "btn btn-success", type: 'button', :id => 'btn_sch') %>
+	  	</div>
+		</div>
+	</div>
+</div>
+
+<script>
+  $('#dre_start_time').timepicki();
+  $('#sch_start_time').timepicki();
+</script>

@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require 'openssl'
+require 'rails/commands/server'
+require 'rack'
+require 'webrick'
+require 'webrick/https'
+
+# Override options of rails configuration
+# rails/commands/server path: C:\Ruby21}\lib\ruby\gems\2.1.0\gems\railties-4.2.0\lib\rails\commands\server.rb
+if ENV['RAILS_ENV'] == 'production'
+  module Rails
+    class Server < ::Rack::Server
+      def default_options
+        super.merge(
+          Port: 443,
+          environment: (ENV['RAILS_ENV'] || 'production').dup,
+          SSLEnable: true,
+          SSLVerifyClient: OpenSSL::SSL::VERIFY_NONE,
+          SSLPrivateKey: OpenSSL::PKey::RSA.new(File.open('ssl/server.key').read),
+          SSLCertificate: OpenSSL::X509::Certificate.new(File.open('ssl/server.crt').read)
+        )
+      end
+    end
+  end
+end
+
+APP_PATH = File.expand_path('../../config/application', __FILE__)
+require_relative '../config/boot'
+require 'rails/commands'

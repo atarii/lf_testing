@@ -1,0 +1,9 @@
+https://%sservices.leapfrog.com/rest/v1/sso
+https://%sservices.leapfrog.com/rest/v1/sso/password_reset
+https://%sservices.leapfrog.com/rest/v1/sso/password
+https://%sservices.leapfrog.com/rest/v1/parent
+https://%sservices.leapfrog.com/rest/v1/devices/NARNIA20150416
+https://%sservices.leapfrog.com/rest/v1/devices/NARNIA20150416/users
+https://%sservices.leapfrog.com/rest/v1/devices/NARNIA20150416?releaseLic=true
+https://%sservices.leapfrog.com/rest/v1/devices/NARNIA20150416/owner
+https://%sservices.leapfrog.com/rest/v1/uploads/device/NARNIAxyz123321xyz20154141436562

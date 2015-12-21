@@ -1,0 +1,246 @@
+<% provide(:title, 'ATG Configuration') %>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>ATG Configuration</h2>
+    </div>
+  </div>
+
+  <%= form_tag({ controller: 'atgs', action: 'config_atg_data' }, method: 'get', class: 'config_atg_data') do %>
+    <div class="form-horizontal">
+      <h3>AppCenter Accounts</h3>
+
+      <div>
+        <h4 class="top15">Empty Account</h4>
+
+        <div class="form-group">
+          <%= label_tag(:empty_email, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:empty_email, @empty_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:empty_pass, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:empty_pass, @empty_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="top15">Account with Credit card</h4>
+
+        <div class="form-group">
+          <%= label_tag(:credit_email, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:credit_email, @credit_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:credit_pass, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:credit_pass, @credit_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="top15">Balance Account</h4>
+
+        <div class="form-group">
+          <%= label_tag(:balance_email, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:balance_email, @balance_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:balance_pass, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:balance_pass, @balance_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="top15">Balance Account with Credit card</h4>
+
+        <div class="form-group">
+          <%= label_tag(:credit_balance_email, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:credit_balance_email, @credit_balance_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:credit_balance_pass, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:credit_balance_pass, @credit_balance_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <div class="form-horizontal">
+      <h3>PayPal Accounts</h3>
+
+      <div>
+        <h4 class="top15">US Paypal account</h4>
+
+        <div class="form-group">
+          <%= label_tag(:p_email_us, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:p_email_us, @p_us_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:p_password_us, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:p_password_us, @p_us_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="top15">CA Paypal account</h4>
+
+        <div class="form-group">
+          <%= label_tag(:p_email_ca, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:p_email_ca, @p_ca_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:p_password_ca, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:p_password_ca, @p_ca_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="top15">UK Paypal account</h4>
+
+        <div class="form-group">
+          <%= label_tag(:p_email_uk, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:p_email_uk, @p_uk_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:p_password_uk, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:p_password_uk, @p_uk_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="top15">IE Paypal account</h4>
+
+        <div class="form-group">
+          <%= label_tag(:p_email_ie, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:p_email_ie, @p_ie_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:p_password_ie, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:p_password_ie, @p_ie_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="top15">AU Paypal account</h4>
+
+        <div class="form-group">
+          <%= label_tag(:p_email_au, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:p_email_au, @p_au_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:p_password_au, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:p_password_au, @p_au_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="top15">ROW Paypal account</h4>
+
+        <div class="form-group">
+          <%= label_tag(:p_email_row, '* Email', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:p_email_row, @p_row_acc[0], class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:p_password_row, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:p_password_row, @p_row_acc[1], class: 'form-control') %></div>
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <div class="form-horizontal">
+      <h3>ATG Soft Good - Catalog Entry</h3>
+
+      <div>
+        <h4 class="top15">Catalog Entry Setting</h4>
+
+        <div class="form-group">
+          <%= label_tag(:prod_id, 'Product ID', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:prod_id, @prod_id, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_sku, 'SKU number', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_sku, @ce_sku, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_catalog_title, 'Catalog Title', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_catalog_title, @ce_catalog_title, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_product_type, 'Product Type', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_product_type, @ce_product_type, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_price, 'Price', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_price, @ce_price, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_strike, 'Strike', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_strike, @ce_strike, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_sale, 'Sale', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_sale, @ce_sale, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_pdp_title, 'PDP Title', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_pdp_title, @ce_pdp_title, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_cart_title, 'Cart Title', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_cart_title, @ce_cart_title, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:ce_pdp_type, 'PDP Type', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:ce_pdp_type, @ce_pdp_type, class: 'form-control') %></div>
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <div class="form-horizontal">
+      <h3>ATG Health Check - Vindicia Account</h3>
+
+      <div>
+        <h4 class="top15">Vindicia Account Setting</h4>
+
+        <div class="form-group">
+          <%= label_tag(:vin_username, '* Username', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= text_field_tag(:vin_username, @vin_username, class: 'form-control') %></div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag(:vin_password, '* Password', class: 'col-sm-2 control-label') %>
+          <div class="col-sm-5"><%= password_field_tag(:vin_password, @vin_password, class: 'form-control') %></div>
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-2">
+          <%= submit_tag('UPDATE', class: 'btn btn-success') %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

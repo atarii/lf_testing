@@ -1,0 +1,36 @@
+<%= stylesheet_link_tag 'dashboard' %>
+<% provide(:title, 'ATG Content Platform Checker') %>
+<div class="glb-loader">
+  <div></div>
+</div>
+
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>ATG Content Platform Checker</h2>
+
+      <p class="subheader">
+        This check that the MOAS and Content Platform CSV have the same platform data.
+      </p>
+    </div>
+  </div>
+
+  <%= form_tag({ controller: 'atg_content_platform_checker', action: 'validate_content_platform' }, method: 'post', multipart: true, class: 'form-horizontal') do %>
+    <% languages = [['english', 'English'], ['french', 'French']] %>
+    <%= tc_radio_buttons_group :language, 'Language', languages, ['english', 'English'] %>
+
+    <%= tc_file_browser_group :content_platform_csv_file, 'Content Platform CSV' %>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-2">
+        <%= submit_tag('Validate', class: 'btn btn-success') %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="dashboard run">
+  <div class="table-responsive">
+    <br/>
+    <%= raw @message %>
+  </div>
+</div>

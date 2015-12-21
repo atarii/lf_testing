@@ -1,0 +1,73 @@
+<% provide(:title, "Checksum Comparison") %>
+<div class="glb-loader">
+  <div>Please wait a minute...</div>
+</div>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>Checksum Comparison</h2>
+      <p class="subheader">
+        1. Specify the folder that contains packages will be downloaded<br/>
+        2. Select CSV file<br/>
+        3. Execute checksum comparison by clicking on Check Checksum button<br/>
+      </p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-9 checkbox">
+      <label class="in-line">
+        <input id="chk_header_only" class="checkbox" type="checkbox" value="1" name="is_active">
+        <span>Use HTTP headers only </span>
+      </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-5">
+      <%= text_field_tag :folder, '', placeholder: "folder name", class: 'form-control' %>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-5">
+      <div class="input-group">
+        <input type="text" class="form-control" readonly="">
+        <span class="input-group-btn">
+          <span class="btn btn-default btn-file">
+            Browse&hellip; <%= file_field_tag :file %>
+          </span>
+        </span>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-5">
+      <input type="button" value="Check checksum" name="commit" class="btn btn	btn-success">
+    </div>
+    <div class="clear"></div>
+  </div>
+  <br/>
+  <div class="form-group">
+    <div class="col-sm-9">
+      To view checksum comparison result, please <%= link_to "click here", utilities_checksum_results_path %>
+    </div>
+  </div>
+  <br/>
+  <!--Headers only-->
+  <div id="header_response">
+    <div class="col-sm-5 table-responsive">
+      <table id="dvData">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>URL</th>
+            <th>RESPONSE</th>
+          </tr>
+        </thead>
+        <tbody id="content"></tbody>
+      </table>
+    </div>
+  </div>
+  <!--End headers only-->
+  <div id="msg"></div>
+</div>

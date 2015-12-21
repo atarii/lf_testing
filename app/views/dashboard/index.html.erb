@@ -1,0 +1,125 @@
+<% user_role = session[:user_role].to_i %>
+
+<div class="glb-loader-small">
+  <div></div>
+</div>
+<div class="dashboard run">
+  <div class="text-centered">
+    <h1>Dashboard <small><%= @current_time.strftime Rails.application.config.time_format %></small></h1>
+  </div>
+  <br>
+
+  <div class="table-responsive">
+    <table>
+      <% @run_data.each do |k, v| %>
+        <% next if v[:hide_list] %>
+        <tr>
+          <td colspan="3">
+            <a name="<%= k %>"></a>
+
+            <h3>
+              <%= k.capitalize %>
+              <% if v[:links] %>
+                <% v[:links].each do |n| %>
+                  <small><a href="<%= n[:url] %>"><%= n[:name] %></a></small>
+                <% end %>
+              <% end %>
+            </h3>
+          </td>
+        </tr>
+        <tr>
+          <th>Status</th>
+          <th>Run Time</th>
+          <th>Description</th>
+        </tr>
+        <% if v[:url] || v[:runs].size == 0 %>
+          <tr>
+            <td colspan="3">no <%= k %> test runs</td>
+          </tr>
+        <% else %>
+          <% v[:runs].each do |n| %>
+            <%= raw v[:type] == 'queued'? n.to_queued_html_row : n.to_html_row %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+  <br/>
+
+  <h2>Test Outposts
+    <small><%= Outpost.last.updated_at.strftime(Rails.application.config.time_format) unless Outpost.last.nil? %>
+      <a id="refresh_outpost" href="">refresh</a>
+    </small>
+  </h2>
+  <div class="table-responsive">
+    <table>
+      <thead>
+      <tr>
+        <a name="outpost"></a>
+        <th>Silo</th>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Status</th>
+        <% if 1 <= user_role && user_role <= 3 %>
+          <th>Action</th>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @test_outposts.each do |outposts| %>
+        <% outposts.each_with_index do |outpost, index| %>
+          <% silo = outpost[:silo].titleize %>
+          <tr id="outpost_<%= outpost[:id] %>" data-outpost-silo="<%= silo %>">
+            <%= raw "<td rowspan=\"#{outposts.size}\">#{silo}</td>" if index == 0 %>
+            <td><%= outpost[:name] %></td>
+            <td><%= outpost[:ip] %></td>
+            <td><%= outpost[:status] %></td>
+            <% if 1 <= user_role && user_role <= 3 %>
+              <td><a onclick="deleteOutpost(<%= outpost[:id] %>, '<%= silo %>');">Delete</a></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>
+    Environment Versions
+    <small><%= @last_updated_env %>
+      <%= link_to 'details', controller: 'dashboard', action: 'env_versions' %>
+    </small>
+  </h2>
+
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <th></th>
+        <% @envs.each do |env| %>
+          <th><%= env %></th>
+        <% end %>
+      </tr>
+
+      <% @apps.each do |app| %>
+        <tr>
+          <th><%= app %></th>
+          <%
+             @envs.each do |env|
+               service = @services.detect { |service| service[:env] == env && service[:name] == app }
+               if service
+                 versions = []
+                 service[:endpoints].each do |endpoint|
+                   !versions.include?(endpoint[:first_version] || '*') && versions << (endpoint[:first_version] || '*')
+                 end
+                 versions.sort!
+          %>
+              <td <%= (versions.size != 1 || versions.include?('*')) && 'class=error' || '' %>><%= raw versions.join('<br>') %></td>
+            <% else %>
+              <td></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "LFC English": {
+    "url": "http://%s-www.leapfrog.com/en-us/app-center-lfc/landing.jsp",
+    "user_agent": "LeapFrogConnect/7.0.6.19846 (Windows NT 6.1; WOW64) Mozilla/5.0 QT/5.3.2 (KHTML, like Gecko)"
+  },
+  "LFC French": {
+    "url": "http://%s-www.leapfrog.com/fr-fr/app-center-lfc/landing.jsp",
+    "user_agent": "LeapFrogConnect/6.1.1.19530 (Windows NT 6.1; WOW64) Mozilla/5.0 QT/5.2.1 (KHTML, like Gecko)"
+  },
+  "LeapPad3 EN": {
+    "url": "http://%s-www.leapfrog.com/en-us/app-center-lpad3e/landing.jsp?",
+    "user_agent": "LeapPad3Explorer/6.0.11.361 (Linux Brio6.0.11.10831) Mozilla/5.0 (AppleWebKit/534.34 KHTML, like Gecko)"
+  },
+
+  "LeapPad3 FR": {
+    "url": "http://%s-www.leapfrog.com/fr-fr/app-center-lpad3e/landing.jsp?",
+    "user_agent": "LeapPad3Explorer/6.2.0.1126 (Linux Brio6.2.0.6888) Mozilla/5.0 (AppleWebKit/534.34 KHTML, like Gecko)"
+  },
+  "LeapPad Ultra": {
+    "url": "http://%s-www.leapfrog.com/en-us/app-center-dv/landing.jsp?",
+    "user_agent": "LeapPadUltra/5.2.7.1002 (Linux Brio4.3.1.10408) Mozilla/5.0 (AppleWebKit/534.34 KHTML, like Gecko, like Android) AppleWebKit/534.34"
+  },
+  "LeapPad Platinum": {
+    "url": "http://%s-www.leapfrog.com/en-us/app-center-dv/landing.jsp?",
+    "user_agent": "LeapPadPlatinum/8.0.2.3033 (Linux Brio8.0.2.6869) Mozilla/5.0 (AppleWebKit/534.34 KHTML, like Gecko)"
+  },
+  "Narnia": {
+    "url": "http://%s-www.leapfrog.com/en-us/app-center-dv/landing.jsp?",
+    "user_agent": "Narnia/KOT49H.eng..20150331.020400 Mozilla/5.0 (Linux; Android 4.4.2; EPICv1 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Safari/537.36"
+  }
+}

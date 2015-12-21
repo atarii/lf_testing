@@ -1,0 +1,4 @@
+Sku,Title,Package Id,Platform,Version,Min Version,Type,URL,Locale,Checksum
+59750-96914,Sid the Science Kid: Sid's Pet Project device assets,GAMS-0x001F0243-DA0000,LST3;GAM2,1.0.0.0,1.0.0.0,DeviceAsset,http://digitalcontent.leapfrog.com/packages/0x001F0243/GAMS-0x001F0243-DA0000.lf2,en_US,f6a526c83a49bbc76d6198d52c8e0c7f82f5a511
+59750-96914,Sid the Science Kid: Sid's Pet Project device assets,PADS-0x001F0243-DA0000,PAD2;LPAD,1.0.0.0,1.0.0.0,DeviceAsset,http://digitalcontent.leapfrog.com/packages/0x001F0243/PADS-0x001F0243-DA0000.lf2,en_US,7447e8056269a4028795ada51f9f5bad450f0ef1
+59750-96914,Sid the Science Kid: Sid's Pet Project device assets,PHRS-0x001F0243-DA0000,PHR1,1.0.0.0,1.0.0.0,DeviceAsset,http://digitalcontent.leapfrog.com/packages/0x001F0243/PHRS-0x001F0243-DA0000.lf2,en_US,f4ff7eccf948b658700e76d581db6771e769ee85

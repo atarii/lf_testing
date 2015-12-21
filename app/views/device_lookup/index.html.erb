@@ -1,0 +1,46 @@
+<% provide(:title, 'Device Lookup') %>
+
+<div class='col-xs-offset-3'>
+  <div class='content-header'>
+    <div class='header-inner'>
+      <h2>Device Lookup</h2>
+      <p class='subheader'>
+        Lookup device information by serial number or activation code
+      </p>
+    </div>
+  </div>
+
+  <%= form_tag({ controller: 'device_lookup', action: 'index' }, method: 'get', class: 'form-horizontal') do %>
+    <%= tc_text_input_group :query, 'Device serial', '', placeholder: 'Enter serial number or activation code' %>
+    <%= tc_submit_tag 'Lookup device', class: 'btn btn-success' %>
+  <% end %>
+</div>
+<br>
+<div class="device_lookup">
+  <% if @lookup %>
+    <% if @lookup[:devices].find_all { |d| d[:data] }.size == 0 %>
+      <h2>Device is not found on (<%= @environments.map { |e| e[:env] }.join ', ' %>) environments</h2>
+    <% else %>
+      <div class="table-responsive">
+        <table>
+          <tr>
+            <th>Environment</th>
+            <th>Serial Number</th>
+            <th>Activation Code</th>
+            <th>JSON Data</th>
+          </tr>
+          <% @lookup[:devices].find_all { |d| d[:data] }.each do |device| %>
+            <tr>
+              <td><%= device[:env] %></td>
+              <td><%= device[:serial] %></td>
+              <td><%= device[:activation] %></td>
+              <td>
+                <pre><%= raw device[:formatted_data] %></pre>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+</div>

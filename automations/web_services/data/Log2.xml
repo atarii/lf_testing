@@ -1,0 +1,65 @@
+﻿<session xmlns="http://services.leapfrog.com/game/log/" user-id="2537994">
+  <game game-id="1638401" timestamp-start="2009-09-24T10:55:13" timestamp-end="2009-09-24T10:58:19" exit-reason="user">
+    <activity activity-id="FP" timestamp-start="2009-09-24T10:55:16" timestamp-end="2009-09-24T10:55:26" exit-reason="completed" score="0">
+      <level difficulty="1.1" change="none" />
+    </activity>
+    <activity activity-id="WL" timestamp-start="2009-09-24T10:55:26" timestamp-end="2009-09-24T10:55:32" exit-reason="completed" score="0">
+      <level difficulty="1.2" change="none" />
+    </activity>
+    <activity activity-id="FP" timestamp-start="2009-09-24T10:55:32" timestamp-end="2009-09-24T10:56:00" exit-reason="completed" score="0">
+      <level difficulty="1.1" change="none" />
+    </activity>
+    <activity activity-id="WL" timestamp-start="2009-09-24T10:56:00" timestamp-end="2009-09-24T10:56:48" exit-reason="completed" score="0">
+      <level difficulty="1.2" change="up">
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:19">
+          <param value="150" />
+          <param value="25" />
+          <answer timestamp="2009-09-24T10:56:19" type="correct" answer="25" />
+        </question>
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:22">
+          <param value="250" />
+          <param value="75" />
+          <answer timestamp="2009-09-24T10:56:23" type="correct" answer="75" />
+        </question>
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:25">
+          <param value="0" />
+          <param value="125" />
+          <answer timestamp="2009-09-24T10:56:25" type="correct" answer="0" />
+        </question>
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:29">
+          <param value="2000" />
+          <param value="75" />
+          <answer timestamp="2009-09-24T10:56:29" type="correct" answer="75" />
+        </question>
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:31">
+          <param value="50" />
+          <param value="100" />
+          <answer timestamp="2009-09-24T10:56:32" type="correct" answer="50" />
+        </question>
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:34">
+          <param value="250" />
+          <param value="75" />
+          <answer timestamp="2009-09-24T10:56:35" type="correct" answer="75" />
+        </question>
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:37">
+          <param value="1" />
+          <param value="2000" />
+          <answer timestamp="2009-09-24T10:56:38" type="correct" answer="1" />
+        </question>
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:40">
+          <param value="10" />
+          <param value="0" />
+          <answer timestamp="2009-09-24T10:56:40" type="correct" answer="0" />
+        </question>
+        <question question-id="1" timed="true" timestamp="2009-09-24T10:56:44">
+          <param value="5" />
+          <param value="0" />
+          <answer timestamp="2009-09-24T10:56:45" type="correct" answer="0" />
+        </question>
+      </level>
+    </activity>
+    <activity activity-id="FP" timestamp-start="2009-09-24T10:56:49" timestamp-end="2009-09-24T10:58:19" exit-reason="completed" score="0">
+      <level difficulty="1.1" change="none" />
+    </activity>
+  </game>
+</session>

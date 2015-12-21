@@ -1,0 +1,57 @@
+<% provide(:title, 'Test Central Configuration') %>
+<h2>Test Central Configuration</h2>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <p class='subheader'>STMP and Email settings</p>
+    </div>
+  </div>
+
+  <div class="glb-loader">
+    <div>Please wait a minute...</div>
+  </div>
+
+  <div id="smtp_settings_msg"></div>
+  <form class="form-horizontal">
+    <%= tc_text_input_group :address, 'Address', @address %>
+    <%= tc_text_input_group :port, 'Port', @port %>
+    <%= tc_text_input_group :domain, 'Domain', @domain %>
+    <%= tc_text_input_group :username, 'Username', @username %>
+    <%= tc_input_group(
+      tc_label_tag(:password, 'Password'),
+      password_field_tag(:password, @password, class: 'form-control')
+    ) %>
+    <%= tc_radio_buttons_group :attachment_type, 'Attach Type', [['none', 'NONE'], ['zip', 'ZIP'], ['html', 'HTML']], @attachment_type %>
+    <%= tc_submit_tag 'Update', id: 'btn_smtp_settings' %>
+  </form>
+  <br/>
+
+  <%= tc_app_config(
+        'Outpost',
+        'outpost_settings_msg',
+        tc_number_input_group(:outpost_refresh_rate, 'Refresh rate', @outpost_refresh_rate, 'seconds', min: 0, max: 7200, require: ''),
+        tc_submit_tag('Update', id: 'btn_outpost_setting')
+      )
+  %>
+  <br/>
+
+  <%= tc_app_config(
+        'Run Queue Setting',
+        'run_queue_settings_msg',
+        [
+          tc_number_input_group(:limit_running_test, 'Limit max', @limit_rng_test, 'test runs', min: 1, max: 99, require: ''),
+          tc_number_input_group(:refresh_rate, 'Refresh rate', @refresh_rate, 'seconds', min: 1, max: 99, require: '')
+        ],
+        tc_submit_tag('Update', id: 'btn_run_queue_settings')
+      )
+  %>
+  <br/>
+
+  <%= tc_app_config(
+        'Email Queue Setting',
+        'email_queue_settings_msg',
+        tc_number_input_group(:email_refresh_rate, 'Refresh rate', @email_refresh_rate, 'seconds', min: 1, max: 99, require: ''),
+        tc_submit_tag('Update', id: 'btn_email_queue_settings')
+      )
+  %>
+</div>

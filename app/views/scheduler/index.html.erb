@@ -1,0 +1,47 @@
+<%= stylesheet_link_tag 'timepicker' %>
+<%= javascript_include_tag 'timepicki' %>
+<% provide(:title, 'Scheduler Administrator') %>
+<h1>
+  Schedules
+  <small><%= Time.now.in_time_zone.strftime Rails.application.config.time_format %></small>
+</h1>
+
+<div class="scheduler">
+  <div>
+    <div id="msg"></div>
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <th>Status</th>
+          <th>Next Run Time</th>
+          <th>Description</th>
+          <th>Location</th>
+          <th></th>
+        </tr>
+        <tbody><%= raw @content %></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal fade" id="d_scheduler" tabindex="-1" role="dialog" aria-labelledby="Edit Schedulers" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= form_tag({controller: 'scheduler', action: 'update_scheduler'}, method: 'post', class: 'form-horizontal') do %>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Edit Schedulers</h4>
+          </div>
+          <div class="modal-body">
+            <%= render 'shared/schedule' %>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success">Save changes</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

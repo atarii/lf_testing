@@ -1,0 +1,72 @@
+<div class="glb-loader-small">
+  <div></div>
+</div>
+<div class="dashboard run">
+  <h1>
+    Environment Versions <small><%= @last_updated_env %>
+    <a onclick="refreshEnv();">refresh</a></small>
+  </h1>
+  <h2>Summary</h2>
+
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <th></th>
+        <% @envs.each do |env| %>
+        <th><%= env %></th>
+        <% end %>
+      </tr>
+
+      <% @apps.each do |app| %>
+      <tr>
+        <th><%= app %></th>
+        <%
+        @envs.each do |env|
+         service = @services.detect { |service| service[:env] == env && service[:name] == app }
+         if service
+           versions = []
+           service[:endpoints].each do |endpoint|
+            !versions.include?(endpoint[:first_version] || '*') && versions << (endpoint[:first_version] || '*')
+          end
+          versions.sort!
+          %>
+          <td <%= (versions.size != 1 || versions.include?('*')) && 'class=error' || '' %>><%= raw versions.join('<br>') %></td>
+          <% else %>
+          <td></td>
+          <% end %>
+          <% end %>
+        </tr>
+        <% end %>
+    </table>
+  </div>
+
+    <h2>Details</h2>
+
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <th>env</th>
+        <th>service-app</th>
+        <th>instance</th>
+        <th>version</th>
+        <th>note</th>
+      </tr>
+
+      <% @services.each do |service| %>
+      <% service[:endpoints].each_with_index do |endpoint, index| %>
+      <tr>
+        <% if index == 0 %>
+        <th rowspan="<%= service[:endpoints].count %>"><%= service[:env] %></th>
+        <% end %>
+        <% if index == 0 %>
+        <th rowspan="<%= service[:endpoints].count %>"><%= service[:name] %></th>
+        <% end %>
+        <td><%= link_to(endpoint[:subdomain], endpoint[:url])%></td>
+        <td><%= (endpoint[:first_version].nil?) ? '*' : endpoint[:first_version] %></td>
+        <td><%= !(endpoint[:first_version].nil?) ? '' : endpoint[:error] %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </table>
+  </div>
+  </div>

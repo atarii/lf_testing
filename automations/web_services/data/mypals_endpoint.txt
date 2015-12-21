@@ -1,0 +1,7 @@
+https://%slfccontent2.leapfrog.com/myname/index.html
+https://%slfccontent2.leapfrog.com/mypicks/index.html
+https://%slfccontent2.leapfrog.com/mymusic/index.html
+https://%slfccontent2.leapfrog.com/mypals/rewards/index.html
+https://%sscout.leapfrog.com/mesamis/index.php
+https://%sscout.leapfrog.com/misamigos2/index.php
+https://%sscout.leapfrog.com/mypals2/index.php

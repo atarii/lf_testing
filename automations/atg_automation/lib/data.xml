@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<data>
+  <information>
+    <webdriver>SELENIUM</webdriver>
+    <testsuite/>
+    <language>EN</language>
+    <env>UAT</env>
+    <locale>US</locale>
+    <accfull/>
+    <accempty/>
+    <accbalance/>
+  </information>
+  <content>
+    <releasedate/>
+  </content>
+  <data_driven>
+    <data_driven_csv/>
+  </data_driven>
+  <devices>
+    <device_store/>
+    <payment_type/>
+  </devices>
+</data>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configuration>
+  <machineSettings>
+    <stationName/>
+    <networkName>lgdn390</networkName>
+    <ip>192.168.189.98</ip>
+    <port type='integer'>3000</port>
+  </machineSettings>
+  <smtpSetting>
+    <address>smtp.gmail.com</address>
+    <port>587</port>
+    <domain>testcentral.com</domain>
+    <username>lflgautomation@gmail.com</username>
+    <password>123456abc!</password>
+    <attachmentType>none</attachmentType>
+  </smtpSetting>
+  <autoSetting>
+    <limitRunningTest>9</limitRunningTest>
+    <refreshRunningRate>2</refreshRunningRate>
+    <refreshOutpostStatus>10</refreshOutpostStatus>
+  </autoSetting>
+  <pagingSetting>
+    <loggingPageLimit>20</loggingPageLimit>
+  </pagingSetting>
+  <emailQueueSetting>
+    <refreshEmailRate>5</refreshEmailRate>
+  </emailQueueSetting>
+</configuration>

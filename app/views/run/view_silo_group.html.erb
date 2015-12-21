@@ -1,0 +1,20 @@
+<%= stylesheet_link_tag 'dashboard' %>
+<% provide(:title, 'Test Results') %>
+<%
+   if session[:user_role].to_i == 1 || session[:user_role].to_i == 2
+     tc_silos = [['ATG', 'ATG'], ['WS', 'Web Services'], ['TC', 'Test Central']]
+   else
+     tc_silos = [['ATG', 'ATG'], ['WS', 'Web Services']]
+   end
+
+   silo_options = tc_silos + @outpost_silos
+%>
+
+<div class="run">
+  <div id="view_result">
+    <center>
+      <%= tc_radio_buttons :silo, silo_options, @selected_silo %>
+    </center>
+  </div>
+  <div id="view_result_component"></div>
+</div>

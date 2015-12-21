@@ -1,0 +1,21 @@
+<%
+   provide(:title, 'PIN Redemption')
+   env_options = session[:user_role].to_i == 1 ? ['QA', 'PROD'] : ['QA']
+   locale_options = ['US', 'US'], ['CA', 'CA'], ['GB', 'UK'], ['IE', 'IE'], ['AU', 'AU'], ['fr_CA', 'FR_CA']
+   pin_type_options = ['redeemValueCard', 'Value Card'], ['redeemGiftPackages', 'Gift Packages'], ['redeemGiftValue', 'Gift Value']
+%>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>PIN Redemption</h2>
+    </div>
+  </div>
+  <%= form_tag({ controller: 'pins', action: 'redeem_pin' }, method: 'get', class: 'form-horizontal') do %>
+    <%= tc_radio_buttons_group :env, 'Environment', env_options %>
+    <%= tc_radio_buttons_group :locale, 'Locale', locale_options %>
+    <%= tc_text_input_group :email, 'Account email', '', placeholder: 'e.g. example@abc.com' %>
+    <%= tc_radio_buttons_group :type_pin, 'PIN\'s Type', pin_type_options %>
+    <%= tc_text_area_group :lf_pin, 'PINs', '', '25x10' %>
+    <%= tc_submit_tag 'Redeem PINs', class: 'btn btn-success js-validate-env-locale js-validate-redeem-pin' %>
+  <% end %>
+</div>

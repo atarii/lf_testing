@@ -1,0 +1,76 @@
+<% provide(:title, 'Login') %>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>Sign In</h2>
+      <p class="subheader">Please login with provided email and password <br/></p>
+    </div>
+  </div>
+  <%= form_tag({ controller: 'users', action: 'signin' }, method: 'post', class: 'form-horizontal') do %>
+    <div class="form-group">
+      <%= label_tag(:user_email, 'Email', class: 'col-sm-2 control-label') %>
+      <div class="col-sm-5">
+        <%= text_field_tag(:user_email, '', class: 'form-control') %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag(:user_password, 'Password', class: 'col-sm-2 control-label') %>
+      <div class="col-sm-5">
+        <%= password_field_tag(:user_password, '', class: 'form-control') %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-7">
+        <%= submit_tag('Log In', class: 'btn btn-success') %>
+      </div>
+    </div>
+  <% end %>
+  <br/>
+
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>Sign Up</h2>
+      <p class="subheader">Don't have an account? Please register here</p>
+    </div>
+  </div>
+  <%= form_tag({ controller: 'users', action: 'create_qa' }, method: 'post', class: 'form-horizontal') do %>
+    <div class="form-group">
+      <%= label_tag(:email, 'Email', class: 'col-sm-2 control-label') %>
+      <div class="col-sm-5">
+        <%= text_field_tag(:email, @email, placeholder: 'e.g. example@abc.com', class: 'form-control') %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag(:first_name, 'First name', class: 'col-sm-2 control-label') %>
+      <div class="col-sm-5">
+        <%= text_field_tag(:first_name, @fname, class: 'form-control') %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag(:last_name, 'Last name', class: 'col-sm-2 control-label') %>
+      <div class="col-sm-5">
+        <%= text_field_tag(:last_name, @lname, class: 'form-control') %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag(:password, 'Password', class: 'col-sm-2 control-label') %>
+      <div class="col-sm-5">
+        <%= password_field_tag(:password, '', class: 'form-control') %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-7">
+        <%= submit_tag('Sign Up', class: 'btn btn-success') %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $().ready(function () {
+    $('#user_fname').val($('#fname').val());
+    $('#user_lname').val($('#lname').val());
+    $('#user_email').val($('#username').val());
+    $('#user_password').val($('#password').val());
+  });
+</script>

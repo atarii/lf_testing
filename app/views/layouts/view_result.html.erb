@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/app/assets/stylesheets/run.css.scss">
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        font-size: 12pt;
+        font-family: "Arial";
+      }
+
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .run .passed {
+        color: #5cb85c;
+      }
+
+      .run .error, .run .failed {
+        color: #f00;
+      }
+
+      .run .pending {
+        color: #0000CC;
+      }
+
+      #rspec-header {
+        height: 11em;
+        color: #000000;
+      }
+
+      .rspec_h4 {
+        padding: 0 10px;
+      }
+
+      pre {
+        display: block;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+        word-break: break-all;
+        word-wrap: break-word;
+        color: red;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      ol {
+        list-style-type: decimal-leading-zero;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

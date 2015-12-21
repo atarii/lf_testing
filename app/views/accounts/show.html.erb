@@ -1,0 +1,33 @@
+<% provide(:email, @account[:email]) %>
+
+<div class="col-xs-offset-3">
+  <% unless @account[:device] == 'Remove license only' %>
+    <h4>The following devices have been removed:</h4>
+    <ul>
+      <% devices_arr = @account[:device] %>
+      <% if devices_arr.empty? %>
+        <p class="text-danger">No device links to this account</p>
+      <% else %>
+        <% devices_arr.each do |device| %>
+          <li>
+            <%= device[:platform] + ': ' + device[:serial_number] %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <h4>The following licenses have been removed:</h4>
+  <ul>
+    <% license_arr = @account[:license] %>
+    <% if license_arr.empty? %>
+      <p class="text-danger">No licenses links to this account</p>
+    <% else %>
+      <% license_arr.each do |license| %>
+        <li>
+          <%= license %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,24 @@
+# Rename this file to local_env.yml
+# Add account settings and API keys here.
+# This file should be listed in .gitignore to keep your settings secret!
+# Each entry gets set as a local environment variable.
+# This file overrides ENV variables in the Unix shell.
+# For example, setting:
+# GMAIL_USERNAME: 'Your_Gmail_Username'
+# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
+
+ATG_LOADPATH: 'automations/atg_automation'
+ATG_XMLDATA_PATH: 'automations/atg_automation/lib/data.xml'
+WEBSERVICE_LOADPATH: 'automations/web_services'
+WEBSERVICE_XMLDATA_PATH: 'automations/web_services/lib/data.xml'
+TC_LOADPATH: 'spec'
+CONFIG_FILE: 'config/config.xml'
+MACHINE_FILE: 'config/machine.xml'
+
+# rspec customization lib
+RSPEC_REPORT_LIB: 'automations/lib'
+
+CONST_CALLER_ID: '755e6f29-b7c8-4b98-8739-a1a7096f879e'
+CONST_SESSION_QA: 'f67e22fa-6049-4640-aa38-4dfe74dbd269'
+CONST_SESSION_STAGING: 'c1497dda-bd9f-4075-9168-2987ddae2e9c'
+CONST_SESSION_PROD: 'b3f0fd80-d903-45da-a181-cf8f2485f042'

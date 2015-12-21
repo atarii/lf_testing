@@ -1,0 +1,168 @@
+<%
+   browser_options = [['FIREFOX', 'Firefox'], ['CHROME', 'Chrome'], ['IE', 'IE 9'], ['WEBKIT', 'Webkit']] unless @silo == 'TC'
+   outposts_options = @outposts
+
+   case @silo
+   when 'ATG'
+     env_options = ['DEV', 'DEV2', 'STAGING', 'UAT', 'UAT2', 'PREVIEW', 'PROD']
+     id_cover = 'release_cover'
+     enable_release = true
+     enable_locale = true
+     enable_data_csv = true
+     device_store_options = ['LFC English', 'LFC French', 'LeapPad3 EN', 'LeapPad3 FR', 'LeapPad Ultra', 'LeapPad Platinum', 'Narnia']
+     payment_type_options = ['Credit Card', 'Account Balance', 'CC + Balance']
+   when 'WS'
+     env_options = ['QA', 'PROD']
+   else
+     env_options = nil
+   end
+%>
+
+<div id="running" class="col-xs-offset-3">
+  <%= hidden_field_tag 'silo', @silo %>
+
+  <% unless outposts_options.blank? %>
+    <%= tc_radio_buttons_group :outpost, 'Outpost', outposts_options, outposts_options[0], class: 'col-sm-9' %>
+  <% end %>
+
+  <div class="form-group">
+    <%= tc_label_tag :testsuite, 'Test Suites' %>
+    <div class="col-sm-5">
+      <%= select_tag :testsuite, options_for_select(@test_suites), class: 'form-control' %>
+      <% if @silo == 'WS' %>
+        <a id="back" onclick="tc.run.back();">Back to previous test suites</a>
+      <% end %>
+    </div>
+  </div>
+
+  <% if outposts_options.blank? %>
+    <% unless env_options.blank? %>
+      <%= tc_radio_buttons_group :env, 'Environment', env_options, nil, class: 'col-sm-9' %>
+    <% end %>
+
+    <% unless browser_options.blank? %>
+      <%= tc_radio_buttons_group :webdriver, 'Browser', browser_options, nil, class: 'col-sm-9' %>
+    <% end %>
+
+    <% if enable_locale %>
+      <%= tc_checkboxes_group :locale, 'Locale', ['US', 'CA'], [], class: 'col-sm-9' %>
+    <% end %>
+
+    <% if enable_release %>
+      <div id="<%= id_cover %>">
+        <%= tc_release_date_group :release_date, 'Release Date' %>
+      </div>
+    <% end %>
+
+    <% if enable_data_csv %>
+      <%= tc_file_browser_group :data_driven_csv, 'Data file', { group_class: 'data_driven_csv', link: { href: '/tc/download_file/data-driven.csv', text: 'CSV Template' } } %>
+    <% end %>
+
+    <% unless device_store_options.blank? %>
+      <div id="device_store_cover">
+        <%= tc_checkboxes_group :device_store, 'Device Store', device_store_options, [], class: 'col-sm-10' %>
+        <%= tc_checkboxes_group :payment_type, 'Payment Type', payment_type_options, [], class: 'col-sm-9' %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+      Test Cases
+      <% if @silo == 'ATG' %>
+        <img id="atg_running_note" src="/assets/information.png" alt="Running Note"/>
+      <% end %>
+      <div class="btn btn-link" onclick="$('#testcase input[type=checkbox]').click(); ">toggle</div>
+    </label>
+
+    <div class="col-sm-9">
+      <div id="testcase" class="checkbox"><span>Please select a Test Suite</span></div>
+    </div>
+  </div>
+
+  <h4 class="top15">Optional</h4>
+
+  <% if outposts_options.blank? %>
+    <%= tc_radio_buttons_group :station, 'Station to Run', @station_info, @station_selected, class: 'col-sm-9' %>
+  <% end %>
+
+  <%= render 'shared/schedule' %>
+
+  <div class="form-group">
+    <h1>
+      <div class="col-sm-offset-2 col-sm-5">
+        <%= submit_tag('QUEUE', class: 'btn btn-lg btn-success') %>
+        <a class="btn btn-link" onclick="tc.run.exportToCSV()">export config</a>
+      </div>
+    </h1>
+  </div>
+</div>
+
+<% if @silo == 'ATG' %>
+  <!-- Create Test suite Modal -->
+  <div class="modal fade" id="d_atgs" tabindex="-1" role="dialog" aria-labelledby="Create New Test Suite" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form class="form-horizontal">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create New Test Suite</h4>
+          </div>
+          <div class="modal-body">
+            <p class="validateTips"></p>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">New Test Suite</label>
+
+              <div class="col-sm-5">
+                <input id="tsname" placeholder="Must include 'content' character for Content Automation" class="form-control"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Existing Test Suites</label>
+
+              <div class="col-sm-5">
+                <select id="d_existing_ts" class="form-control"></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Test Cases</label>
+
+              <div class="col-sm-8">
+                <div id="d_testcase" class="checkbox"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="dAtgClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="dAtgSubmit" type="button" class="btn btn-success">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATG running notes Modal -->
+  <div id="atg_running_note_content" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">ATG running notes</h4>
+        </div>
+        <div class="modal-body">
+          <p>1. Clear data in 'atg_tracking' table before running other suites.</p>
+
+          <p>2. Run 'pre_condition' only before running all the rest test cases.</p>
+
+          <p>3. Upload redeem code (if need) before running test cases check out with Redeem code (ATG -> upload
+            PIN).</p>
+
+          <p>4. Open Charles (if need) when running on other locales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+{
+  "child_management": {
+    "endpoint": "ChildManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/child/management/"
+  },
+  "customer_management": {
+    "endpoint": "CustomerManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/customer/management/"
+  },
+  "authentication_management": {
+    "endpoint": "AuthenticationService",
+    "namespace": "http://services.leapfrog.com/inmon/authentication/"
+  },
+  "device_management": {
+    "endpoint": "DeviceManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/management/"
+  },
+  "owner_management": {
+    "endpoint": "OwnerManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/owner/management/"
+  },
+  "device_profile_management": {
+    "endpoint": "DeviceProfileManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/profile/management/"
+  },
+  "package_management": {
+    "endpoint": "PackageManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/lfp/management/"
+  },
+  "license_management": {
+    "endpoint": "LicenseManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/lfp/license/management"
+  },
+  "pin_management": {
+    "endpoint": "PinManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/lfp/pin/management"
+  }
+}

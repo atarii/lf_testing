@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title><%= @case_name %></title>
+<%= favicon_link_tag 'favicon.ico' %>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+
+<script type="text/javascript">
+  // <![CDATA[
+
+  function addClass(element_id, classname) {
+    document.getElementById(element_id).className += (" " + classname);
+  }
+
+  function removeClass(element_id, classname) {
+    var elem = document.getElementById(element_id);
+    var classlist = elem.className.replace(classname, '');
+    elem.className = classlist;
+  }
+
+  function moveProgressBar(percentDone) {
+    document.getElementById("rspec-header").style.width = percentDone + "%";
+  }
+
+  function makeRed(element_id) {
+    removeClass(element_id, 'passed');
+    removeClass(element_id, 'not_implemented');
+    addClass(element_id, 'failed');
+  }
+
+  function makeYellow(element_id) {
+    var elem = document.getElementById(element_id);
+    if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+      if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+        removeClass(element_id, 'passed');
+        addClass(element_id, 'not_implemented');
+      }
+    }
+  }
+
+  function apply_filters() {
+    var passed_filter = document.getElementById('passed_checkbox').checked;
+    var failed_filter = document.getElementById('failed_checkbox').checked;
+    var pending_filter = document.getElementById('pending_checkbox').checked;
+
+    assign_display_style("example passed", passed_filter);
+    assign_display_style("example failed", failed_filter);
+    assign_display_style("example not_implemented", pending_filter);
+  }
+
+  function get_display_style(display_flag) {
+    var style_mode = 'none';
+    if (display_flag === true) {
+      style_mode = 'block';
+    }
+    return style_mode;
+  }
+
+  function assign_display_style(classname, display_flag) {
+    var style_mode = get_display_style(display_flag);
+    var elems = document.getElementsByClassName(classname);
+    for (var i = 0; i < elems.length; i++) {
+      elems[i].style.display = style_mode;
+    }
+  }
+
+  function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+    var display_style_mode = get_display_style(display_flag);
+    var subgroup_style_mode = get_display_style(subgroup_flag);
+    var elems = document.getElementsByClassName(classname);
+    for (var i = 0; i < elems.length; i++) {
+      var style_mode = display_style_mode;
+      if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+        elems[i].style.display = subgroup_style_mode;
+      } else {
+        elems[i].style.display = display_style_mode;
+      }
+    }
+  }
+
+  // ]]>
+</script>
+</head>
+<body class="rp_body">
+<h1 class="rp_body_h1">
+  <%=raw @breadcrumbs %>
+</h1>
+
+<div class="rspec-report">
+  <div id="rspec-header">
+    <h1><%= @case['name'] %>
+      <small><%= @case['file_name'] %></small>
+    </h1>
+    <div class="table-responsive run">
+      <table id="rp_table">
+        <tr>
+          <td class="text-center a"><b>Show</b></td>
+          <td class="text-left a"><b>Total</b></td>
+          <td class="text-right a"><strong id="totals"><%= @case['total_steps'] %></strong></td>
+        </tr>
+        <tr>
+          <td class="text-center">
+            <input id="passed_checkbox" name="passed_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="1"/>
+          </td>
+          <td class="text-left passed">✓ Passed</td>
+          <td class="text-right passed"><strong id="totals_pass"><%= @case['passed'] %></strong></td>
+        </tr>
+        <tr>
+          <td class="text-center">
+            <input id="failed_checkbox" name="failed_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="2"/>
+          </td>
+          <td class="text-left failed">✗ Failed</td>
+          <td class="text-right failed"><strong id="totals_fail"><%= @case['total_failed'] %></strong></td>
+        </tr>
+        <tr>
+          <td class="text-center">
+            <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3"/>
+          </td>
+          <td class="text-left pending">Δ Pending</td>
+          <td class="text-right pending"><strong id="totals_pending"><%= @case['total_uncertain'] %></strong></td>
+        </tr>
+        <tr>
+          <td class = "text-right a" colspan="2">Execution time (hh:mm:ss)</td>
+          <td class = "text-right a" colspan="2"><label id="duration"><%= @case['duration'] %></label></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <h4 class="rspec_h4"><%= @case['comment'] %></h4>
+
+  <% if @case['error'] %>
+  <pre class="error">Problem executing test case:<br><%= @case['error'] %></pre>
+  <% end %>
+
+  <div class="results">
+    <%= raw @case['content'] %>
+  </div>
+</div>
+</body>
+</html>

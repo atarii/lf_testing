@@ -1,0 +1,36 @@
+<%= javascript_include_tag 'stations' %>
+<%= stylesheet_link_tag 'search' %>
+<% provide(:title, 'Station Settings') %>
+
+<h1>Station Settings</h1>
+<div id="delete_machine_msg"></div>
+<div class="result">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr class="highlights">
+          <th>Network Name</th>
+          <th>Station Name</th>
+          <th>IP</th>
+          <th>Port</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= raw @station_list_html %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h1>Machine Configuration</h1>
+<div class="col-xs-offset-2">
+  <div id="machine_config_msg"></div>
+  <div class="form-horizontal">
+    <%= tc_text_input_group :station_name, 'Station Name', @station_name %>
+    <%= tc_text_input_group :network_name, 'Network Name', @network_name, disabled: true %>
+    <%= tc_text_input_group :ip_address, 'IP address', @ip_address %>
+    <%= tc_number_input_group :port, 'Port', @port, '', min: 0, max: 65535 %>
+    <%= tc_submit_tag 'Save', id: 'btn_machine_config', class: 'btn btn-success', onclick: 'update_machine_config();' %>
+  </div>
+</div>

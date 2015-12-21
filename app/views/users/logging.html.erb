@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag 'search' %>
+<% provide(:title, 'Audit Log') %>
+<h1>Audit Log</h1>
+<% unless @logging_result.blank? %>
+<%= form_tag({controller: 'users', action: 'update_limit'}, method: 'post', class: 'form-inline') do %>
+<div class="result">
+  <div class="paging form-inline">
+    <div class="form-group top5">
+      <label>Page</label>
+      <% (1..@page_count).each do |p| %>
+      <% url = '/users/logging/' %>
+      <% url += "u/#{@selected_user}/" unless @selected_user.blank? %>
+      <% url += "p/#{p}" %>
+      <a href="<%= url %>">
+        <% if @selected_page.to_i == p  %>
+        <b><%= p %></b>
+        <% else %>
+        <%= p %>
+        <% end %>
+      </a>
+      <% end %>
+    </div>
+    <div class='form-group pull-right'>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon2">Display Items</span>
+        <%= text_field_tag(:limit_log_paging, @limit_log_paging, type: 'number', min: 1, class: 'form-control') %>
+        <span class="input-group-btn">
+          <%= submit_tag('Update', class: 'btn btn-success', type: 'submit', :id => 'btn_smtp_settings') %>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive top15">
+    <table class="table">
+      <thead>
+        <tr class="highlights">
+          <td>Date</td>
+          <td>User</td>
+          <td>Details</td>
+        </tr>
+      </thead>
+      <tbody>
+        <%= @logging_result.html_safe %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% end %>
+<% end %>

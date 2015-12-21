@@ -1,0 +1,42 @@
+<%
+   provide(:title, 'Device linking')
+   env_options = session[:user_role].to_i == 1 ? ['QA', 'PROD'] : ['QA']
+%>
+<div class="glb-loader">
+  <div></div>
+</div>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>Link devices to your account</h2>
+      <p class="subheader">
+        This page allows you to link devices to your account.
+      </p>
+    </div>
+  </div>
+  <div class="form-horizontal">
+    <%= tc_radio_buttons_group :env, 'Environment', env_options %>
+    <%= tc_text_input_group :atg_ld_email, 'Username', nil, placeholder: 'e.g. example@abc.com' %>
+    <%= tc_password_input_group :atg_ld_password, 'Password', '' %>
+    <%= tc_select_group :atg_ld_platform, 'Platform', @all_platforms %>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-7 radio">
+        <label>
+          <%= radio_button_tag :atg_ld, 'autolink', true %>
+          <span>Auto link (System will generate children, devices and link to your account automatically)</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-7 radio">
+        <label>
+          <%= radio_button_tag :atg_ld, 'noautolink' %>
+          <span>Manual link (Enter Device serial and child ID)</span>
+        </label>
+      </div>
+    </div>
+    <%= tc_text_input_group :atg_ld_deviceserial, 'Device serial (*)', '', group_class: 'manual' %>
+    <%= tc_text_input_group :atg_ld_children, 'Child ID', '', group_class: 'manual' %>
+    <%= tc_submit_tag 'Link device', class: 'btn btn-success js-validate-env-locale' %>
+  </div>
+</div>

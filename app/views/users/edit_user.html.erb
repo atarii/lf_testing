@@ -1,0 +1,63 @@
+<% provide(:title, 'Edit User') %>
+<div class="col-xs-offset-3">
+	<div class="content-header">
+		<div class="header-inner">
+		<h2>Edit User</h2>
+	  <p class="subheader">This page allows you to edit a user
+	  	<br/>Please leave password field empty if you don't want to change it</p>
+	  </div>
+	</div>
+	<%= form_tag({controller: 'users', action: 'edit'}, method: 'post', class: 'form-horizontal') do %>
+	  <div class="form-group">
+	  	<%= hidden_field_tag(:id, @user[:id]) %>
+	  	<%= label_tag(:email, 'Email', class: 'col-sm-2 control-label') %>
+	  	<div class="col-sm-5">
+	    	<%= text_field_tag(:email, @user[:email], placeholder: 'e.g. example@abc.com', class: 'form-control') %>
+	  	</div>
+	  </div>
+	  <div class="form-group">
+	    <%= label_tag(:first_name, 'First name', class: 'col-sm-2 control-label') %>
+	    <div class="col-sm-5">
+	    	<%= text_field_tag(:first_name, @user[:first_name], class: 'form-control') %>
+	  	</div>
+	  </div>
+	  <div class="form-group">
+	    <%= label_tag(:last_name, 'Last name', class: 'col-sm-2 control-label') %>
+	    <div class="col-sm-5">
+	    	<%= text_field_tag(:last_name, @user[:last_name], class: 'form-control') %>
+	  	</div>
+	  </div>
+	  <div class="form-group">
+	    <%= label_tag(:password, 'Password', class: 'col-sm-2 control-label') %>
+	    <div class="col-sm-5">
+	    	<%= password_field_tag(:password, '', class: 'form-control') %>
+	  	</div>        	
+	  </div>
+	  <div class="form-group">
+	    <%= label_tag :role_id, 'Role', class: 'col-sm-2 control-label' %>
+	    <div class="col-sm-5">
+	    	<%= select_tag 'role_id', options_for_select([['Administrator', 1], ['Power User', 2], ['QA', 3]], @user[:role_id]), class: 'form-control' %>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <%= label_tag(:is_active, 'Active', class: 'col-sm-2 control-label') %>
+	    <div class="col-sm-5">
+	    	<%= check_box_tag(:is_active, 1, @user[:is_active], class: 'checkbox') %>
+	    </div>
+	  </div>
+		<div class="form-group">
+	  	<div class="col-sm-offset-2 col-sm-2">
+	    	<%= submit_tag('Update', class: 'btn btn-success') %>
+	  	</div>
+	  </div>
+	<% end %>
+</div>
+
+<script>
+    $().ready(function () {
+    	$('#user_fname').val($('#fname').val());
+    	$('#user_lname').val($('#lname').val());
+        $('#user_email').val($('#username').val());
+        $('#user_password').val($('#password').val());
+    });
+</script>

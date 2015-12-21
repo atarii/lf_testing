@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<data>
+  <environment>
+    <env>QA</env>
+    <web_driver/>
+  </environment>
+</data>

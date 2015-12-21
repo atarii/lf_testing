@@ -1,0 +1,23 @@
+<%
+   provide(:title, "Clear Account")
+   env_options = session[:user_role].to_i == 1 ? ['QA', 'PROD'] : ['QA']
+%>
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2>Clear Account</h2>
+      <p class="subheader">
+        This will clear parent account of all devices and software licenses.
+        <br/>USE WITH CAUTION!!!
+      </p>
+    </div>
+  </div>
+
+  <%= form_tag({ controller: 'accounts', action: 'clear_account' }, method: 'get', class: 'form-horizontal') do %>
+    <%= tc_radio_buttons_group :env, 'Environment', env_options, nil, class: 'col-sm-9' %>
+    <%= tc_text_input_group :email, 'Parent e-mail', '', placeholder: 'e.g. example@abc.com' %>
+    <%= tc_password_input_group :password, 'Password', '' %>
+    <%= tc_checkboxes_group :is_active, '', [[1, 'Remove license only']], { class: 'col-sm-5' } %>
+    <%= tc_submit_tag 'Clear Account', class: 'btn btn-success js-validate-env-locale' %>
+  <% end %>
+</div>

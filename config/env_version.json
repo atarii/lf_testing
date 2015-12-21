@@ -1,0 +1,288 @@
+{
+  "services": [
+    {
+      "env": "Dev",
+      "name": "ATG",
+      "path": "/en-us/store/version.jsp",
+      "endpoints": [],
+      "instances": "dev-www"
+    },
+    {
+      "env": "Dev",
+      "name": "CSTools",
+      "path": ":8080/customerservicetools/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emdlcsapp01,emdlcsapp02"
+    },
+    {
+      "env": "Dev",
+      "name": "GeoIpLookup",
+      "path": ":8080/geoip-lookup/maven/versions.txt",
+      "endpoints": [],
+      "instances": "dev-geo"
+    },
+    {
+      "env": "Dev",
+      "name": "INMON-CIS",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emdlcis,emdlcis01"
+    },
+    {
+      "env": "Dev",
+      "name": "INMON-CIS2",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emdlcis2,emdlcis2app01,emdlcis2app02"
+    },
+    {
+      "env": "Dev",
+      "name": "INMON-CLP",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emdlclp01"
+    },
+    {
+      "env": "Dev",
+      "name": "INMON-DLOG",
+      "path": ":8085/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emdldlog,emdldlog01,emdldlog02"
+    },
+    {
+      "env": "Dev",
+      "name": "LeapTV Register",
+      "path": "/register/version.php",
+      "protocol": "https://",
+      "endpoints": [],
+      "instances": "dev-leaptv"
+    },
+    {
+      "env": "Dev",
+      "name": "LFCam",
+      "path": ":8090/lfcam/maven/versions.txt",
+      "vips": [
+        "http://dev-lfcam.leapfrog.com/lfcam/maven/versions.txt"
+      ],
+      "endpoints": [],
+      "instances": "emdllfcam01,emdllfcam02"
+    },
+    {
+      "env": "Dev",
+      "name": "LFConnect",
+      "path": ":8080/lexplorer/maven/versions.txt",
+      "vips": [
+        "http://dev-lfconnect.leapfrog.com/lexplorer/maven/versions.txt"
+      ],
+      "endpoints": [],
+      "instances": "emdlcp2app01,emdlcp2app02"
+    },
+    {
+      "env": "Dev",
+      "name": "PinGen",
+      "path": ":8080/pingen/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emdlpin01"
+    },
+    {
+      "env": "QA",
+      "name": "CSTools",
+      "path": ":8080/customerservicetools/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emqlcsapp01,emqlcsapp02"
+    },
+    {
+      "env": "QA",
+      "name": "GeoIpLookup",
+      "path": ":8080/geoip-lookup/maven/versions.txt",
+      "endpoints": [],
+      "instances": "qa-geo"
+    },
+    {
+      "env": "QA",
+      "name": "INMON-CIS",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emqlcis,emqlcis01,emqlcis02"
+    },
+    {
+      "env": "QA",
+      "name": "INMON-CIS2",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emqlcis2,emqlcis2app01,emqlcis2app02"
+    },
+    {
+      "env": "QA",
+      "name": "INMON-CLP",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emqlclp,emqlclp01,emqlclp02"
+    },
+    {
+      "env": "QA",
+      "name": "INMON-DLOG",
+      "path": ":8085/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emqldlog,emqldlog01,emqldlog02"
+    },
+    {
+      "env": "QA",
+      "name": "LeapTV Register",
+      "path": "/register/version.php",
+      "protocol": "https://",
+      "endpoints": [],
+      "instances": "qa-leaptv"
+    },
+    {
+      "env": "QA",
+      "name": "LFCam",
+      "path": ":8090/lfcam/maven/versions.txt",
+      "vips": [
+        "http://qa-lfcam.leapfrog.com/lfcam/maven/versions.txt"
+      ],
+      "endpoints": [],
+      "instances": "emqllfcam01,emqllfcam02"
+    },
+    {
+      "env": "QA",
+      "name": "LFConnect",
+      "path": ":8080/lexplorer/maven/versions.txt",
+      "vips": [
+        "http://qa-lfconnect.leapfrog.com/lexplorer/maven/versions.txt"
+      ],
+      "endpoints": [],
+      "instances": "emqlcp2app01,emqlcp2app02"
+    },
+    {
+      "env": "QA",
+      "name": "PinGen",
+      "path": ":8080/pingen/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emqlpin01"
+    },
+    {
+      "env": "UAT",
+      "name": "ATG",
+      "path": "/en-us/store/version.jsp",
+      "endpoints": [],
+      "instances": "uat-www"
+    },
+    {
+      "env": "Staging",
+      "name": "GeoIpLookup",
+      "path": ":8080/geoip-lookup/maven/versions.txt",
+      "endpoints": [],
+      "instances": "staging-geo"
+    },
+    {
+      "env": "Staging",
+      "name": "INMON-CIS2",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "emrlcis2app01"
+    },
+    {
+      "env": "Staging",
+      "name": "LeapTV Register",
+      "path": "/register/version.php",
+      "protocol": "https://",
+      "endpoints": [],
+      "instances": "staging-leaptv"
+    },
+    {
+      "env": "Staging",
+      "name": "LFConnect",
+      "path": ":8080/lexplorer/maven/versions.txt",
+      "vips": [
+        "http://qa-lfconnect.leapfrog.com/lexplorer/maven/versions.txt"
+      ],
+      "endpoints": [],
+      "instances": "emrlcp2app02"
+    },
+    {
+      "env": "Prod",
+      "name": "ATG",
+      "path": "/en-us/store/version.jsp",
+      "endpoints": [],
+      "instances": "www"
+    },
+    {
+      "env": "Prod",
+      "name": "CSTools",
+      "path": ":8080/customerservicetools/maven/versions.txt",
+      "endpoints": [],
+      "instances": "evplcsapp01,evplcsapp02,evplcsapp03,evplcsapp04"
+    },
+    {
+      "env": "Prod",
+      "name": "GeoIpLookup",
+      "path": ":8080/geoip-lookup/maven/versions.txt",
+      "endpoints": [],
+      "instances": "geo"
+    },
+    {
+      "env": "Prod",
+      "name": "INMON-CIS",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "evplcis,evplcis01,evplcis02,evplcis03,evplcis04,evplcis05,evplcis06,evplcis07,evplcis08"
+    },
+    {
+      "env": "Prod",
+      "name": "INMON-CIS2",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "evplcis2,evplcis2app01,evplcis2app02,evplcis2app03,evplcis2app04,evplcis2app05,evplcis2app06"
+    },
+    {
+      "env": "Prod",
+      "name": "INMON-CLP",
+      "path": ":8080/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "evplclp,evplclp01,evplclp02,evplclp03,evplclp04"
+    },
+    {
+      "env": "Prod",
+      "name": "INMON-DLOG",
+      "path": ":8085/inmon/maven/versions.txt",
+      "endpoints": [],
+      "instances": "evpldlog,evpldlog01,evpldlog02,evpldlog03,evpldlog04,evpldlog05,evpldlog06"
+    },
+    {
+      "env": "Prod",
+      "name": "LeapTV Register",
+      "path": "/register/version.php",
+      "protocol": "https://",
+      "endpoints": [],
+      "instances": "leaptv"
+    },
+    {
+      "env": "Prod",
+      "name": "LFCam",
+      "path": ":8090/lfcam/maven/versions.txt",
+      "vips": [
+        "http://lfcam.leapfrog.com/lfcam/maven/versions.txt"
+      ],
+      "endpoints": [],
+      "instances": "evpllfcam,evpllfcam01,evpllfcam02,evpllfcam03,evpllfcam04,evpllfcam05,evpllfcam06,evpllfcam07,evpllfcam08"
+    },
+    {
+      "env": "Prod",
+      "name": "LFConnect",
+      "path": ":8080/lexplorer/maven/versions.txt",
+      "vips": [
+        "http://lfconnect.leapfrog.com/lexplorer/maven/versions.txt"
+      ],
+      "endpoints": [],
+      "instances": ""
+    },
+    {
+      "env": "Prod",
+      "name": "PinGen",
+      "path": ":8080/pingen/maven/versions.txt",
+      "endpoints": [],
+      "instances": "evplpin01"
+    }
+  ]
+}

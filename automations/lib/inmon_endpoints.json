@@ -1,0 +1,90 @@
+{
+  "child_management": {
+    "endpoint": "ChildManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/child/management/"
+  },
+  "customer_management": {
+    "endpoint": "CustomerManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/customer/management/"
+  },
+  "authentication_management": {
+    "endpoint": "AuthenticationService",
+    "namespace": "http://services.leapfrog.com/inmon/authentication/"
+  },
+  "device_management": {
+    "endpoint": "DeviceManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/management/"
+  },
+  "owner_management": {
+    "endpoint": "OwnerManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/owner/management/"
+  },
+  "device_profile_management": {
+    "endpoint": "DeviceProfileManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/profile/management/"
+  },
+  "package_management": {
+    "endpoint": "PackageManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/lfp/management/"
+  },
+  "license_management": {
+    "endpoint": "LicenseManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/lfp/license/management"
+  },
+  "reward": {
+    "endpoint": "RewardService",
+    "namespace": "http://services.leapfrog.com/inmon/reward/service/"
+  },
+  "device_profile_content": {
+    "endpoint": "DeviceProfileContentService",
+    "namespace": "http://services.leapfrog.com/inmon/device/profile/content/service/"
+  },
+  "device_log_upload": {
+    "endpoint": "DeviceLogUploadService",
+    "namespace": "http://services.leapfrog.com/inmon/device/logs/upload/"
+  },
+  "asset": {
+    "endpoint": "AssetService",
+    "namespace": "http://services.leapfrog.com/inmon/asset/service/"
+  },
+  "container_management": {
+    "endpoint": "ContainerManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/container/service/"
+  },
+  "caller_id": {
+    "endpoint": "CallerIdService",
+    "namespace": "http://services.leapfrog.com/inmon/callerid/service/"
+  },
+  "content_feed": {
+    "endpoint": "ContentFeedService",
+    "namespace": "http://services.leapfrog.com/inmon/content/feed/service/"
+  },
+  "curriculum": {
+    "endpoint": "CurriculumService",
+    "namespace": "http://services.leapfrog.com/inmon/curriculum/builder/v2_0/"
+  },
+  "pin_management": {
+    "endpoint": "PinManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/device/lfp/pin/management"
+  },
+  "soft_good_management": {
+    "endpoint": "SoftGoodManagementService",
+    "namespace": "http://services.leapfrog.com/inmon/softgood/management"
+  },
+  "micromod_store": {
+    "endpoint": "MicromodStoreService",
+    "namespace": "http://services.leapfrog.com/inmon/micromod/store/"
+  },
+  "product_registration": {
+    "endpoint": "ProductRegistrationService",
+    "namespace": "http://services.leapfrog.com/inmon/product/registration/"
+  },
+  "recommendation": {
+    "endpoint": "RecommendationService",
+    "namespace": "http://services.leapfrog.com/inmon/recommendation/service/"
+  },
+  "survey": {
+    "endpoint": "SurveyService",
+    "namespace": "http://services.leapfrog.com/inmon/survey/service"
+  }
+}

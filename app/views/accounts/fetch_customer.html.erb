@@ -1,0 +1,296 @@
+<%
+   provide(:title, 'Customer Lookup')
+   env_options = session[:user_role].to_i == 1 ? ['QA', 'STAGING', 'PROD'] : ['QA', 'STAGING']
+%>
+<div class='col-xs-offset-3'>
+  <div class='content-header'>
+    <div class='header-inner'>
+      <h2>Customer Lookup</h2>
+      <p class='subheader'>This page allows you to:<br/>
+        1. Lookup: customer information, children, devices and app history<br/>
+        2. Update customer information, install/remove/revoke apps<br/>
+        Note: For searching only, leave password field blank
+      </p>
+    </div>
+  </div>
+
+  <%= form_tag({ controller: 'accounts', action: 'fetch_customer' }, method: 'get', class: 'form-horizontal') do %>
+    <%= tc_radio_buttons_group :env, '* Environment', env_options, @env %>
+    <%= tc_text_input_group :user_email, '* Email', @email, placeholder: 'e.g. example@abc.com' %>
+    <%= tc_password_input_group :user_password, 'Password', '' %>
+    <%= tc_submit_tag 'Lookup Customer', class: 'js-validate-env-locale' %>
+  <% end %>
+</div>
+
+<%
+   def tc_address_group(address, index = nil)
+     id = index.to_s
+     street = address['street'].kind_of?(Hash) ? '' : address['street']['unit']
+     postal_code = address['region']['postal_code']
+     country = address['region']['country']
+     city = address['region']['city']
+     province = address['region']['province']
+     type = address['type']
+     address_types = options_for_select(
+       [
+         ['billing', 'billing'],
+         ['shipping', 'shipping'],
+         ['home', 'home'],
+         ['mailing', 'mailing']
+       ],
+       type
+     )
+
+     <<-HTML.html_safe
+      <h2 class="custom_h2">Address #{id}</h2>
+      #{tc_input_group(
+       tc_label_tag("address_type#{id}", 'type'),
+       select_tag("address_type#{id}", address_types, class: "form-control")
+     )}
+     #{text_field_tag "addr_id#{id}", address['id'], type: 'hidden' }
+     #{tc_text_input_group "street#{id}", 'street', street }
+     #{tc_text_input_group "postal#{id}", 'postal-code', postal_code }
+     #{tc_text_input_group "country#{id}", 'country', country }
+     #{tc_text_input_group "city#{id}", 'city', city }
+     #{tc_text_input_group "province#{id}", 'province', province }
+     HTML
+   end
+
+   def show_address(address)
+     if address.kind_of?(Array)
+       address.each_with_index do |el, ix|
+         tc_address_group(el, ix + 1)
+       end
+       text_field_tag :num_of_addr, address.size, type: 'hidden'
+     else
+       tc_address_group(address)
+     end
+   end
+
+   def tc_phone_group(phone, index = nil)
+     id = index.to_s
+     number = phone['number'].split('ext.')[0].strip
+     ext = phone['number'].split('ext.')[1].strip
+     type = phone['type']
+     phone_types = options_for_select(
+       [
+         ['mobile', 'mobile'],
+         ['home', 'home'],
+         ['work', 'work']
+       ],
+       type
+     )
+
+     <<-HTML.html_safe
+      <h2 class="custom_h2">Phone information #{id}</h2>
+      #{tc_text_input_group "number#{id}", 'phone', number}
+     #{tc_text_input_group "ext#{id}", 'ext.', ext}
+     #{tc_input_group(
+       tc_label_tag("phone_type#{id}", 'type'),
+       select_tag("phone_type#{id}", phone_types, class: "form-control")
+     )}
+     HTML
+   end
+
+   def show_phone(phone)
+     if phone.kind_of?(Array)
+       phone['phone'].each_with_index do |el, ix|
+         tc_phone_group(el, ix + 1)
+       end
+       text_field_tag :num_of_phones, i, type: 'hidden'
+     else
+       tc_phone_group(phone)
+     end
+   end
+%>
+
+<% def show_customer_info %>
+  <div class='col-xs-offset-3'>
+    <h3 class='top15'>Customer Information</h3>
+
+    <div id='cus_info'>
+      <%= form_tag({ controller: 'accounts', action: 'update_customer' }, method: 'post', class: 'form-horizontal') do %>
+        <div class='cus_info'>
+          <%= tc_text_input_group :cus_registration_date, 'Registration date', @cus_info['customer']['registration_date'], readonly: true %>
+          <%= tc_text_input_group :cus_type, 'Type', @cus_info['customer']['type'], readonly: true %>
+          <%= tc_text_input_group :cus_id, 'Customer ID', @cus_info['customer']['id'], readonly: true %>
+          <%= tc_text_input_group :screen, 'Screen name', @cus_info['customer']['screen_name'] %>
+          <%= tc_text_input_group :locale, 'Locale', @cus_info['customer']['locale'] %>
+          <%= tc_text_input_group :alias, 'Alias', @cus_info['customer']['alias'] %>
+          <%= tc_text_input_group :salutation, 'Salutation', @cus_info['customer']['salutation'] %>
+          <%= tc_text_input_group :first_name, 'First name', @cus_info['customer']['first_name'] %>
+          <%= tc_text_input_group :middle_name, 'Middle name', @cus_info['customer']['middle_name'] %>
+          <%= tc_text_input_group :last_name, 'Last name', @cus_info['customer']['last_name'] %>
+          <%= tc_text_input_group :username, 'Username', @cus_info['customer']['credentials']['username'] %>
+          <%= tc_password_input_group :password, 'Password', @cus_info['customer']['credentials']['password'] %>
+          <%= tc_text_input_group :password_hint, 'Password hint', @cus_info['customer']['credentials']['hint'], class: 'form-control' %>
+          <%= tc_text_input_group :email, 'Email', @cus_info['customer']['email'], class: 'form-control' %>
+
+          <% address = @cus_info['customer']['address'] %>
+          <% show_address(address) unless address.nil? %>
+
+          <% phone = @cus_info['customer']['phone'] %>
+          <% show_phone(phone) unless phone.nil? %>
+
+          <% if @editable %>
+            <%= tc_submit_tag 'Update' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% def show_children %>
+  <div class='col-xs-offset-3'>
+    <h3 class='top15'>Children Information</h3>
+  </div>
+  <div id='children_info'>
+    <div class='col-xs-offset-3'>
+      <h2 class='custom_h2'>Children</h2>
+    </div>
+    <div class='table-responsive'>
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Grade</th>
+          <th>Gender</th>
+          <th>Date of birth</th>
+        </tr>
+        <% count_child = 0; @children.each do |c| %>
+          <tr id='<%= c[:id] %>' class='anchor'>
+            <td><%= count_child += 1 %></td>
+            <td><%= c[:id] %></td>
+            <td><%= c[:name] %></td>
+            <td><%= c[:grade] %></td>
+            <td><%= c[:gender] %></td>
+            <td><%= c[:dob] %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<% def show_devices %>
+  <div id='devices_info'>
+    <div class='col-xs-offset-3'>
+      <h2 class='custom_h2'>Devices</h2>
+    </div>
+    <div class='table-responsive'>
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Serial</th>
+          <th>Platform</th>
+          <th>Child ID</th>
+        </tr>
+        </tr>
+        <% count_device = 0; @devices.each do |d| %>
+          <tr>
+            <td><%= count_device += 1 %></td>
+            <td><%= d[:serial] %></td>
+            <td><%= d[:platform] %></td>
+            <td>
+              <% lnk = [] %>
+              <% d[:profiles].each { |p| %>
+                <% lnk << "<a href=\"##{p}\" onclick=\"$('.anchor').removeAttr('style');$('##{p}').attr('style', 'background-color: #FAF99C');\">#{p}</a>" %>
+              <% } %>
+              <%= lnk.join(', ').html_safe %>
+            </td>
+          </tr>
+        <% end unless @devices.blank? %>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<% def show_app_history %>
+  <div id='app_history_info'>
+    <div class='col-xs-offset-3'>
+      <h2 class='custom_h2'>App history</h2>
+    </div>
+
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>SKU</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Device serial</th>
+          <th>Package ID</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+
+        <% count_app = 0; @apps.each do |app|
+          rs = app[:device_info].count; device_info = app[:device_info]; %>
+          <tr id='<%= app[:license_id] %>'>
+            <td rowspan=<%= rs %>><%= count_app += 1 %></td>
+            <td rowspan=<%= rs %>><%= app[:app_name] %></td>
+            <td rowspan=<%= rs %>><%= app[:sku] %></td>
+            <td rowspan=<%= rs %>><%= app[:type] %></td>
+            <td rowspan=<%= rs %>><%= app[:grant_date] %></td>
+            <td><%= device_info[0][:device_serial] if device_info != [] %></td>
+            <td><%= device_info[0][:package_id] if device_info != [] %></td>
+            <td><%= device_info[0][:status] if device_info != [] %></td>
+            <td>
+              <% if @editable && device_info != [] && device_info[0][:status] == 'installed' %>
+                <a href='/accounts/remove_license?device_serial=<%= device_info[0][:device_serial] %>&sku=<%= app[:sku] %>&slot=<%= device_info[0][:slot] %>'>remove</a>
+              <% elsif device_info != [] %>
+                <a href='/accounts/report_installation?device_serial=<%= device_info[0][:device_serial] %>&sku=<%= app[:sku] %>&license_id=<%= app[:license_id] %>'>install</a>
+              <% end %>
+            </td>
+          </tr>
+
+          <% device_info.drop(1).each do |di| %>
+            <tr>
+              <td><%= di[:device_serial] %></td>
+              <td><%= di[:package_id] %></td>
+              <td><%= di[:status] %></td>
+              <td>
+                <% if @editable && di[:status] == 'installed' %>
+                  <a href='/accounts/remove_license?device_serial=<%= di[:device_serial] %>&sku=<%= app[:sku] %>&slot=<%= di[:slot] %>'>remove</a>
+                <% else %>
+                  <a href='/accounts/report_installation?device_serial=<%= di[:device_serial] %>&sku=<%= app[:sku] %>&license_id=<%= app[:license_id] %>'>install</a>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% end unless @apps.blank? %>
+      </table>
+    </div>
+
+    <div class='col-xs-offset-3'>
+      <h2 class='custom_h2'>Revoke license</h2>
+    </div>
+
+    <%= form_tag({ controller: 'accounts', action: 'revoke_license' }, method: 'post', class: 'form-horizontal') do %>
+      <div class='form-group'>
+        <div class='col-sm-offset-3 col-sm-6'>
+          <%= select_tag :revoke_license, options_for_select(@revoke_license), class: 'form-control' unless @revoke_license.blank? %>
+        </div>
+      </div>
+      <div class='form-group'>
+        <div class='col-sm-offset-3 col-sm-6'>
+          <%= submit_tag('Revoke license', class: 'btn btn-success js-validate-env-locale') if @editable && !@revoke_license.blank? %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% def show_customer_info_driver
+     return if @cus_info.nil?
+
+     show_customer_info
+     show_children if @editable
+     show_devices
+     show_app_history
+   end %>
+
+<% show_customer_info_driver %>

@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family: Helvetica, Arial;
+      }
+
+      .passed {
+        color: green;
+      }
+
+      .failed {
+        color: red;
+      }
+
+      .n_a {
+        color: goldenrod;
+      }
+
+      ol {
+        list-style-type: decimal-leading-zero;
+      }
+
+      td {
+        padding: 0 5px;
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><%= @title %> summary: <%= @time_stamp %></h2>
+    <h3>Repeats every <%= @time_amount %> minutes</h3>
+
+    <% if @content != '' %>
+      <div class="table-responsive">
+        <table class="table">
+          <tr class="highlights">
+            <th>Status</th>
+            <th>Start Time</th>
+            <th>Description</th>
+          </tr>
+          <%= raw @content %>
+        </table>
+      </div>
+      <br/>
+    <% else %>
+      <p class='passed'><b>No test runs to report since last time!</b></p>
+    <% end %>
+
+    <p>Email auto-generated from <a href="<%= @root_url %>"><%= @server_name %></a>. Please do not respond.</p>
+  </body>
+</html>

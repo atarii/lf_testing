@@ -1,0 +1,26 @@
+<% provide(:title, "#{@silo.titleize} Upload Test Results") %>
+<div class="glb-loader">
+  <div></div>
+</div>
+
+<div class="col-xs-offset-3">
+  <div class="content-header">
+    <div class="header-inner">
+      <h2><%= @silo.titleize %> Upload Test Result</h2>
+
+      <p class="subheader">
+        This utility is to upload an Outpost test result (.json) to Test Central
+      </p>
+    </div>
+  </div>
+
+  <%= form_tag({ controller: 'outpost', action: 'upload_result'}, method: 'post', multipart: true, class: 'form-horizontal') do %>
+    <%= tc_file_browser_group :outpost_json, 'JSON file' %>
+    <%= tc_submit_tag 'Upload Result', { onclick: 'return fn_import();' } %>
+    <br>
+
+    <div class="form-group">
+      <%= raw @message %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,108 @@
+<h1>
+  <%=raw @breadcrumbs %>
+</h1>
+<% if @current_date %>
+  <h2>
+    <small><%= link_to raw('<span class="glyphicon glyphicon-chevron-left"/>'), "/#{@silo}/view/#{@previous_date}" %></small>
+    <%= @current_date %>
+    <small><%= link_to raw('<span class="glyphicon glyphicon-chevron-right"/>'), "/#{@silo}/view/#{@next_date}" %></small>
+  </h2>
+<% end %>
+<div class="row">
+  <div class="result">
+    <fieldset>
+      <br/>
+      <div class="summary"><%= raw @running_summary %></div>
+      <div class="table-responsive">
+        <table class="table table-hover summary_table">
+          <% if @level == 0 %>
+            <thead>
+            <tr class="highlights">
+              <th>Test Runs</th>
+              <th colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @test_group.each do |group| %>
+              <tr>
+                <td>
+                  <a <%= group[:css_class] %> href="/<%= group[:silo] %>/view/<%= group[:path] %>"><%= group[:name].gsub('_', ' ') %></a>
+                </td>
+                <%= td_download "/#{group[:silo]}/download/#{group[:path]}" %>
+                <%= td_delete "/#{group[:silo]}/delete/#{group[:path]}" %>
+              </tr>
+            <% end %>
+            </tbody>
+          <% elsif @level == 1 %>
+            <thead>
+            <tr class="highlights">
+              <th>Test Run</th>
+              <th>Updated</th>
+              <th colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if !@test_run.blank? %>
+              <% @test_run.each do |run| %>
+              <% is_displayed = run[:run][:status]=='done' || run[:run][:status]=='running' %>
+                <tr>
+                  <td>
+                    <%= raw run[:run].to_html %>
+                  </td>
+                  <td class="center"><%= run[:run].updated_at.strftime Rails.application.config.short_time_format %></td>
+                  <%= is_displayed ? td_download("/#{run[:silo]}/download/#{run[:path]}") : '<td></td>'.html_safe %>
+                  <%= is_displayed ? td_delete("/#{run[:silo]}/delete/#{run[:path]}") : '<td></td>'.html_safe %>
+                </tr>
+              <% end %>
+            <% else %>
+              <% @ds_groups.each do |_k, group| %>
+                <tr>
+                  <td>
+                    <table class="run_details">
+                      <% upd = acts = '' %>
+                      <% group.each do |run| %>
+                        <% info = run.view_title_and_url
+                           url = "#{@group_name}/#{run.name_lvl2}"
+                           upd += "<tr class=\"height-25px\"><td>#{run.updated_at.strftime Rails.application.config.short_time_format}</td></tr>"
+                           acts += "<tr class=\"height-25px\">#{td_download("/#{run[:data][:silo]}/download/#{url}")}
+                                    #{td_delete("/#{run[:data][:silo]}/delete/#{url}")}</tr>"
+                        %>
+                        <tr class="<%= info[:css_class] %> height-25px">
+                          <td><a href="<%= url %>" class="<%= info[:css_class] %> row-link"><%= info[:title] %></a></td>
+                          <td class="status"><%= info[:status] %></td>
+                          <td class="duration"><%= run.duration %></td>
+                        </tr>
+                      <% end %>
+                    </table>
+                  </td>
+                  <td><table class="run_details"><%= upd.html_safe %></table></td>
+                  <td><table class="run_details"><%= acts.html_safe %></table></td>
+                </tr>
+              <% end %>
+            <% end %>
+            </tbody>
+          <% else %>
+            <thead>
+            <tr class="highlights">
+              <th>Link</th>
+              <th>Status</th>
+              <th>Duration</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @test_script.each_with_index do |c, index| %>
+              <% url = c[:device_store].nil? ? c[:url] : "#{@name_lvl2}/#{c[:file_name]}"%>
+              <tr class="<%= c[:css_class] %>">
+                <td><a class="<%= c[:css_class] %> row-link" href="<%= url %>"><%= '%02d' % (index + 1) %>. <%= c[:case_name] %></a></td>
+                <td><%= c[:case_status].to_s.upcase %></td>
+                <td><%= c[:duration].to_s.upcase %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+      <br/>
+    </fieldset>
+  </div>
+</div>

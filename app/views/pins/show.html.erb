@@ -1,0 +1,44 @@
+<% provide(:title, @lf_alias) %>
+<h1>PIN Redemption Results</h1>
+<h2>Account Information</h2>
+<div class="table-responsive">
+  <table>
+    <tr>
+      <td width="100px">Full name</td>
+      <td><%= @lf_alias %></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><%= @email %></td>
+    </tr>
+    <tr>
+      <td>ID</td>
+      <td><%= @customerid %></td>
+    </tr>
+    <tr>
+      <td>Type</td>
+      <td><%= @cust_type %></td>
+    </tr>
+    <tr>
+      <td>Locale</td>
+      <td><%= @locale %></td>
+    </tr>
+  </table>
+</div>
+
+<h2>PINs status</h2>
+<div class="table-responsive">
+  <table>
+    <tr>
+      <th>PIN</th>
+      <th>Status</th>
+    </tr>
+    <% @pin_arr.each do |pin| %>
+      <% (pin[:status].include?('Success')) ? class_css = 'pass' : (pin[:status].include?('Invalid locale')) ? class_css = 'invalid' : class_css = 'fail' %>
+      <tr>
+        <td class="<%= class_css %>"><%= pin[:pin] %></td>
+        <td class="<%= class_css %>"><%= pin[:status] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

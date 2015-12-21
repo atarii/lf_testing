@@ -1,0 +1,39 @@
+<% provide(:title, 'Upload Redeem Code') %>
+<div class='glb-loader'>
+  <div></div>
+</div>
+<div class='col-xs-offset-3'>
+  <div class='content-header'>
+    <div class='header-inner'>
+      <h2>Upload Redeem Code</h2>
+
+      <p class='subheader'>
+        This page is used to upload redeem code that will be used to purchase apps while running ATG automation testing.
+      </p>
+    </div>
+  </div>
+  <div class='form-horizontal'>
+    <%= form_tag({ controller: 'atgs', action: 'process_upload_code' }, method: 'post', multipart: true, class: 'form-horizontal') do %>
+
+      <%= tc_radio_buttons_group :env, 'Environment', ['QA', 'PROD'], 'QA' %>
+
+      <div class='form-group'>
+        <%= tc_label_tag :file_name, 'Code type' %>
+        <div class='col-sm-5'>
+          <%= select_tag :file_name, options_for_select(@type), class: 'form-control' %>
+        </div>
+      </div>
+
+      <%= tc_file_browser_group :code_file, 'Code file', { group_class: 'code_file_cover', title: 'Import excel file name: E.g. USV1.xls' }%>
+
+      <div class='form-group'>
+        <div class='col-sm-offset-2 col-sm-2'>
+          <%= submit_tag('Upload file', class: 'btn btn-success js-validate-env-locale js-validate-uploaded-pin') %>
+        </div>
+      </div>
+      <div class='form-group'>
+        <%= raw @message %>
+      </div>
+    <% end %>
+  </div>
+</div>

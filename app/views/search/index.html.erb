@@ -1,0 +1,42 @@
+<% provide(:title, 'Search Test Results ') %>
+<h1>
+  Search Test Results
+</h1>
+<div class="col-xs-offset-3">
+  <%= form_tag({controller: 'search', action: 'index'}, method: 'get', class: 'form-inline') do %>
+    <div class="form-group col-sm-7">
+      <%= text_field_tag(:q, @search_string, class: 'form-control', autofocus: true, placeholder: 'Search Result') %>
+    </div>
+    <%= submit_tag('Search', class: 'btn btn-success') %>
+  <% end %>
+</div>
+<% unless @rs.blank? || @rs[:runs].blank? %>
+<br/>
+<div class="result run">
+  <div class="table-responsive">
+    <table class="table-hover">
+      <thead>
+      <tr class="highlights">
+        <th>Test Runs</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @rs[:runs].each do |run| %>
+        <tr>
+          <td>
+            Run Time: <%= run.created_at.in_time_zone.strftime Rails.application.config.time_format.html_safe %>
+            <%= "<br>#{run.data[:station_name]}" unless run.data[:station_name].blank? %>
+            <br/>User: <%= run.user_info[:full_name].html_safe %>
+            <br/><%= run.to_html.html_safe %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br/>
+<div class="text-left">
+  Duration: <%= @rs[:duration] %> second(s)
+</div>
+<% end %>
