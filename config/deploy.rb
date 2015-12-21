@@ -6,8 +6,6 @@ set :repo_url, 'https://github.com/tanmle/lf_testing.git'
 set :deploy_to, '/var/www/sqaauto_testcentral'
 set :branch, 'master'
 
-set :use_sudo, true
-
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
